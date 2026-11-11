@@ -106,6 +106,9 @@ body.nav-off nav{display:none}
 .back{display:block;margin:0 0 14px;padding:4px 8px;border-radius:6px;color:var(--accent);text-decoration:none;font-size:13px;font-weight:600}
 .back:hover{background:var(--soft)}
 @media (max-width:900px){main{padding:64px 14px 70px} #floatCtl{top:8px;right:8px} .ctl{display:none}}
+
+.mins{float:right;color:var(--muted);font-size:11.5px;margin-left:8px;opacity:.9;font-weight:400}
+.legend{font-size:11.5px;color:var(--muted);margin:-4px 0 8px 8px}
 </style>
 </head>
 <body>
@@ -116,47 +119,48 @@ body.nav-off nav{display:none}
 <nav>
   <a class="back" href="index.html">&larr; COS326 CRAM</a>
   <h2>Contents</h2>
-  <a href="#big-picture" class="part">Big picture</a>
-  <a href="#p1" class="part">1 · Transactions &amp; NewSQL <span class="tag t20">L20</span></a>
-  <a href="#p1-s1" class="sub">1.1 Introduction &amp; central idea</a>
-  <a href="#p1-s2" class="sub">1.2 ACID &amp; OLTP</a>
-  <a href="#p1-s3" class="sub">1.3 Why NewSQL? Scaling</a>
-  <a href="#p1-s4" class="sub">1.4 Key features of NewSQL</a>
-  <a href="#p1-s5" class="sub">1.5 SQL vs NoSQL vs NewSQL</a>
-  <a href="#p1-s6" class="sub">1.6 Advantages &amp; limitations</a>
-  <a href="#p1-s7" class="sub">1.7 Example systems</a>
-  <a href="#p1-s8" class="sub">1.8 Case study — online banking selection</a>
-  <a href="#p1-s9" class="sub">1.9 Summary, homework, questions</a>
-  <a href="#p2" class="part">2 · Big Data tech <span class="tag t21">L21</span></a>
-  <a href="#p2-s1" class="sub">2.1 What is Big Data? — the V5</a>
-  <a href="#p2-s2" class="sub">2.2 Evolution of architectures</a>
-  <a href="#p2-s3" class="sub">2.3 Hadoop — legacy components &amp; lessons</a>
-  <a href="#p2-s4" class="sub">2.4 Apache Spark</a>
-  <a href="#p2-s5" class="sub">2.5 Storage — HDFS vs cloud object storage</a>
-  <a href="#p2-s6" class="sub">2.6 Ecosystem tools — then vs now</a>
-  <a href="#p2-s7" class="sub">2.7–2.12 Flink, cloud, formats, streaming, ML</a>
-  <a href="#p2-s8" class="sub">2.13 Governance, security, ethics &amp; legal</a>
-  <a href="#p2-s9" class="sub">2.14 Summary, homework, questions</a>
-  <a href="#p3" class="part">3 · Data mining <span class="tag t22">L22</span></a>
-  <a href="#p3-s1" class="sub">3.1 Definition, mining vs warehousing, KDD, goals</a>
-  <a href="#p3-s2" class="sub">3.2 Association rules</a>
-  <a href="#p3-s3" class="sub">3.3 Algorithms for frequent itemsets</a>
-  <a href="#p3-s4" class="sub">3.4 Hierarchies, multi-dimensional &amp; negative rules, complications</a>
-  <a href="#p3-s5" class="sub">3.5 Classification</a>
-  <a href="#p3-s6" class="sub">3.6 Clustering</a>
-  <a href="#p3-s7" class="sub">3.7 Other data mining approaches</a>
-  <a href="#p3-s8" class="sub">3.8 Applications, tools &amp; future</a>
-  <a href="#p4" class="part">4 · Warehousing &amp; OLAP <span class="tag t23">L23</span><span class="tag t24">L24</span></a>
-  <a href="#p4a" class="sub">4.1 Concepts &amp; architecture</a>
-  <a href="#p4b" class="sub">4.2 Dimensional modelling &amp; the star schema</a>
-  <a href="#p4c" class="sub">4.3 Building &amp; loading the ROLAP structure L24</a>
-  <a href="#p4d" class="sub">4.4 OLAP extensions to SQL L24</a>
-  <a href="#p4e" class="sub">4.5 Tools, OLAP categories &amp; homework L24</a>
-  <a href="#p5" class="part">5 · Connections &amp; exam focus</a>
-  <a href="#p5-s1" class="sub">Cross-lecture links</a>
-  <a href="#p5-s2" class="sub">Discrepancies to remember</a>
-  <a href="#p5-s3" class="sub">Scenario cheat-sheet</a>
-  <a href="#coverage" class="part">Heading coverage map</a>
+  <div class="legend">Study time at about 100 words/min</div>
+  <a href="#big-picture" class="part"><span class="mins">1 min</span>Big picture</a>
+  <a href="#p1" class="part"><span class="mins">11 min</span>1 · Transactions &amp; NewSQL <span class="tag t20">L20</span></a>
+  <a href="#p1-s1" class="sub"><span class="mins">1 min</span>1.1 Introduction &amp; central idea</a>
+  <a href="#p1-s2" class="sub"><span class="mins">1 min</span>1.2 ACID &amp; OLTP</a>
+  <a href="#p1-s3" class="sub"><span class="mins">1 min</span>1.3 Why NewSQL? Scaling</a>
+  <a href="#p1-s4" class="sub"><span class="mins">2 min</span>1.4 Key features of NewSQL</a>
+  <a href="#p1-s5" class="sub"><span class="mins">1 min</span>1.5 SQL vs NoSQL vs NewSQL</a>
+  <a href="#p1-s6" class="sub"><span class="mins">1 min</span>1.6 Advantages &amp; limitations</a>
+  <a href="#p1-s7" class="sub"><span class="mins">1 min</span>1.7 Example systems</a>
+  <a href="#p1-s8" class="sub"><span class="mins">1 min</span>1.8 Case study — online banking selection</a>
+  <a href="#p1-s9" class="sub"><span class="mins">2 min</span>1.9 Summary, homework, questions</a>
+  <a href="#p2" class="part"><span class="mins">11 min</span>2 · Big Data tech <span class="tag t21">L21</span></a>
+  <a href="#p2-s1" class="sub"><span class="mins">1 min</span>2.1 What is Big Data? — the V5</a>
+  <a href="#p2-s2" class="sub"><span class="mins">1 min</span>2.2 Evolution of architectures</a>
+  <a href="#p2-s3" class="sub"><span class="mins">1 min</span>2.3 Hadoop — legacy components &amp; lessons</a>
+  <a href="#p2-s4" class="sub"><span class="mins">1 min</span>2.4 Apache Spark</a>
+  <a href="#p2-s5" class="sub"><span class="mins">1 min</span>2.5 Storage — HDFS vs cloud object storage</a>
+  <a href="#p2-s6" class="sub"><span class="mins">1 min</span>2.6 Ecosystem tools — then vs now</a>
+  <a href="#p2-s7" class="sub"><span class="mins">2 min</span>2.7–2.12 Flink, cloud, formats, streaming, ML</a>
+  <a href="#p2-s8" class="sub"><span class="mins">1 min</span>2.13 Governance, security, ethics &amp; legal</a>
+  <a href="#p2-s9" class="sub"><span class="mins">2 min</span>2.14 Summary, homework, questions</a>
+  <a href="#p3" class="part"><span class="mins">14 min</span>3 · Data mining <span class="tag t22">L22</span></a>
+  <a href="#p3-s1" class="sub"><span class="mins">2 min</span>3.1 Definition, mining vs warehousing, KDD, goals</a>
+  <a href="#p3-s2" class="sub"><span class="mins">2 min</span>3.2 Association rules</a>
+  <a href="#p3-s3" class="sub"><span class="mins">3 min</span>3.3 Algorithms for frequent itemsets</a>
+  <a href="#p3-s4" class="sub"><span class="mins">1 min</span>3.4 Hierarchies, multi-dimensional &amp; negative rules, complications</a>
+  <a href="#p3-s5" class="sub"><span class="mins">1 min</span>3.5 Classification</a>
+  <a href="#p3-s6" class="sub"><span class="mins">1 min</span>3.6 Clustering</a>
+  <a href="#p3-s7" class="sub"><span class="mins">2 min</span>3.7 Other data mining approaches</a>
+  <a href="#p3-s8" class="sub"><span class="mins">2 min</span>3.8 Applications, tools &amp; future</a>
+  <a href="#p4" class="part"><span class="mins">20 min</span>4 · Warehousing &amp; OLAP <span class="tag t23">L23</span><span class="tag t24">L24</span></a>
+  <a href="#p4a" class="sub"><span class="mins">4 min</span>4.1 Concepts &amp; architecture</a>
+  <a href="#p4b" class="sub"><span class="mins">4 min</span>4.2 Dimensional modelling &amp; the star schema</a>
+  <a href="#p4c" class="sub"><span class="mins">4 min</span>4.3 Building &amp; loading the ROLAP structure L24</a>
+  <a href="#p4d" class="sub"><span class="mins">3 min</span>4.4 OLAP extensions to SQL L24</a>
+  <a href="#p4e" class="sub"><span class="mins">4 min</span>4.5 Tools, OLAP categories &amp; homework L24</a>
+  <a href="#p5" class="part"><span class="mins">4 min</span>5 · Connections &amp; exam focus</a>
+  <a href="#p5-s1" class="sub"><span class="mins">2 min</span>Cross-lecture links</a>
+  <a href="#p5-s2" class="sub"><span class="mins">1 min</span>Discrepancies to remember</a>
+  <a href="#p5-s3" class="sub"><span class="mins">2 min</span>Scenario cheat-sheet</a>
+  <a href="#coverage" class="part"><span class="mins">3 min</span>Heading coverage map</a>
 </nav>
 
 <main>
