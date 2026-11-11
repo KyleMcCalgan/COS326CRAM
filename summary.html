@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COS 326 New Stuff Summary</title>
+<style>
+:root{
+  --bg:#fbfbf9; --ink:#2d313a; --muted:#80879a; --line:#ececf0; --accent:#5877c9; --soft:#f3f5fa;
+  --code:#f4f5f8; --warn:#fbf5e6; --key:#f1f5fc;
+  --l20:#5b7bd5; --l21:#3f9f87; --l22:#c27a4a; --l23:#8b6bc0; --l24:#c05f85;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#262a33; --ink:#e2e5eb; --muted:#9ca3b3; --line:#363c48; --accent:#93b1f7; --soft:#2e343f;
+    --code:#2d323d; --warn:#37332a; --key:#2b3240;
+    --l20:#93b1f7; --l21:#6fd0b3; --l22:#f0a577; --l23:#c4a6ef; --l24:#f08fb2; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent)}
+.layout{display:flex;max-width:none;margin:0}
+nav{position:sticky;top:0;align-self:flex-start;height:100vh;overflow:auto;width:270px;flex:none;padding:56px 8px 40px 16px;font-size:13px}
+nav h2{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 10px;font-weight:600}
+nav a{display:block;color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:6px}
+nav a:hover{color:var(--ink);background:var(--soft)}
+nav a.part{font-weight:600;color:var(--ink);margin-top:12px}
+nav a.sub{padding-left:18px}
+main{flex:1;min-width:0;max-width:1480px;margin:0 auto;padding:30px 48px 100px}
+h1{font-size:26px;font-weight:650;margin:0 0 6px}
+.sub-title{color:var(--muted);margin:0 0 22px}
+h2.part-h{font-size:21px;font-weight:650;margin:56px 0 8px;padding-bottom:8px;border:none;border-bottom:1px solid var(--line);scroll-margin-top:16px}
+h3{font-size:16.5px;font-weight:650;margin:26px 0 8px}
+h4{font-size:12px;margin:16px 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+p{margin:6px 0}
+ul,ol{margin:6px 0;padding-left:22px}
+li{margin:2px 0}
+.card{background:var(--soft);border:none;border-radius:10px;padding:12px 16px;margin:12px 0}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px;background:none}
+th,td{border:none;border-bottom:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:none;color:var(--muted);font-size:12.5px;font-weight:600}
+.tbl{overflow-x:auto}
+code,pre{font-family:ui-monospace,Consolas,Menlo,monospace;font-size:13px}
+code{background:var(--code);padding:1px 5px;border-radius:4px}
+pre{background:var(--code);padding:10px 14px;border-radius:8px;overflow:auto;border:none;line-height:1.5}
+pre code{background:none;padding:0}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:0 7px;border-radius:99px;vertical-align:middle;margin-right:3px;background:var(--soft)}
+.t20{color:var(--l20)}.t21{color:var(--l21)}.t22{color:var(--l22)}.t23{color:var(--l23)}.t24{color:var(--l24)}
+.note{background:var(--warn);border:none;border-radius:8px;padding:8px 14px;margin:12px 0;font-size:14px}
+.key{background:var(--key);border:none;border-radius:8px;padding:8px 14px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:14px 0}
+.flow div{flex:1 1 170px;background:var(--soft);border:none;border-radius:10px;padding:9px 12px;font-size:13px}
+.flow b{display:block;margin-bottom:2px}
+
+@media print{ nav{display:none} .card,table{break-inside:avoid} }
+
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"\25B8";display:inline-block;width:1.1em;color:var(--muted);transition:transform .15s}
+details[open]>summary::before{transform:rotate(90deg)}
+details.part{margin-top:44px;scroll-margin-top:16px}
+summary.part-h{font-size:21px;font-weight:650;padding-bottom:8px;border-bottom:1px solid var(--line)}
+summary.part-h:hover,summary.sh3:hover{color:var(--accent)}
+.pbody{padding-top:6px}
+details.sec{margin-top:10px;scroll-margin-top:16px}
+summary.sh3{font-size:16.5px;font-weight:650;padding:10px 0 6px}
+.sbody{padding:0 0 6px 1.1em}
+.ctl{display:flex;gap:8px;margin:0 0 6px}
+.ctl button{border:none;border-radius:20px;background:var(--soft);color:var(--muted);font:inherit;font-size:13.5px;padding:5px 13px;cursor:pointer}
+.ctl button:hover{color:var(--ink)}
+@media print{details{display:block}}
+
+#navT{border:none;background:var(--soft);color:var(--muted);border-radius:8px;width:34px;height:34px;font-size:18px;line-height:1;cursor:pointer;flex:none}
+#navT:hover{color:var(--ink)}
+body.nav-off nav{display:none}
+#navT{position:fixed;top:12px;left:12px;z-index:30}
+
+
+
+
+/*GLOSS*/
+:root{--tipbg:#ffffff}
+@media (prefers-color-scheme: dark){:root{--tipbg:#3a4252}}
+.term{border-bottom:1px dotted var(--accent);cursor:help}
+.term:focus{outline:none;background:var(--soft)}
+#tip{display:none;position:fixed;z-index:100;max-width:360px;padding:9px 13px;border-radius:10px;background:var(--tipbg);color:var(--ink);box-shadow:0 6px 24px rgba(0,0,0,.22);font-size:13.5px;line-height:1.5;pointer-events:auto}
+#tip b{display:block;margin-bottom:2px;color:var(--accent)}
+#toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(10px);opacity:0;pointer-events:none;background:var(--tipbg);color:var(--ink);padding:9px 18px;border-radius:20px;box-shadow:0 6px 24px rgba(0,0,0,.22);font-size:14px;transition:opacity .2s,transform .2s;z-index:101}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+/*ENDGLOSS*/
+
+#floatCtl{position:fixed;top:12px;right:20px;z-index:30;display:flex;gap:6px;background:var(--bg);padding:4px;border-radius:22px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+#floatCtl button{border:none;border-radius:18px;background:var(--soft);color:var(--muted);font:inherit;font-size:13.5px;padding:5px 13px;cursor:pointer}
+#floatCtl button:hover{color:var(--ink)}
+
+
+@media (max-width:900px){
+  #navT{display:block}
+  nav,body.nav-off nav{display:block !important;position:fixed;left:0;top:0;bottom:0;height:auto;width:82%;max-width:320px;background:var(--bg);z-index:40;transform:translateX(-104%);transition:transform .2s;box-shadow:2px 0 18px rgba(0,0,0,.3);padding:56px 8px 40px 14px;overflow:auto}
+  body.nav-open nav{transform:none}
+  table{display:block;overflow-x:auto}
+  pre{font-size:12px}
+  h1{font-size:22px}
+}
+.back{display:block;margin:0 0 14px;padding:4px 8px;border-radius:6px;color:var(--accent);text-decoration:none;font-size:13px;font-weight:600}
+.back:hover{background:var(--soft)}
+@media (max-width:900px){main{padding:64px 14px 70px} #floatCtl{top:8px;right:8px} .ctl{display:none}}
+</style>
+</head>
+<body>
+<div id="floatCtl"><button type="button" id="expAll2">Expand all</button><button type="button" id="colAll2">Collapse all</button></div>
+<button id="navT" type="button" aria-label="Toggle contents" aria-expanded="true">&#9776;</button>
+<div class="layout">
+
+<nav>
+  <a class="back" href="index.html">&larr; COS326 CRAM</a>
+  <h2>Contents</h2>
+  <a href="#big-picture" class="part">Big picture</a>
+  <a href="#p1" class="part">1 · Transactions &amp; NewSQL <span class="tag t20">L20</span></a>
+  <a href="#p1-s1" class="sub">1.1 Introduction &amp; central idea</a>
+  <a href="#p1-s2" class="sub">1.2 ACID &amp; OLTP</a>
+  <a href="#p1-s3" class="sub">1.3 Why NewSQL? Scaling</a>
+  <a href="#p1-s4" class="sub">1.4 Key features of NewSQL</a>
+  <a href="#p1-s5" class="sub">1.5 SQL vs NoSQL vs NewSQL</a>
+  <a href="#p1-s6" class="sub">1.6 Advantages &amp; limitations</a>
+  <a href="#p1-s7" class="sub">1.7 Example systems</a>
+  <a href="#p1-s8" class="sub">1.8 Case study — online banking selection</a>
+  <a href="#p1-s9" class="sub">1.9 Summary, homework, questions</a>
+  <a href="#p2" class="part">2 · Big Data tech <span class="tag t21">L21</span></a>
+  <a href="#p2-s1" class="sub">2.1 What is Big Data? — the V5</a>
+  <a href="#p2-s2" class="sub">2.2 Evolution of architectures</a>
+  <a href="#p2-s3" class="sub">2.3 Hadoop — legacy components &amp; lessons</a>
+  <a href="#p2-s4" class="sub">2.4 Apache Spark</a>
+  <a href="#p2-s5" class="sub">2.5 Storage — HDFS vs cloud object storage</a>
+  <a href="#p2-s6" class="sub">2.6 Ecosystem tools — then vs now</a>
+  <a href="#p2-s7" class="sub">2.7–2.12 Flink, cloud, formats, streaming, ML</a>
+  <a href="#p2-s8" class="sub">2.13 Governance, security, ethics &amp; legal</a>
+  <a href="#p2-s9" class="sub">2.14 Summary, homework, questions</a>
+  <a href="#p3" class="part">3 · Data mining <span class="tag t22">L22</span></a>
+  <a href="#p3-s1" class="sub">3.1 Definition, mining vs warehousing, KDD, goals</a>
+  <a href="#p3-s2" class="sub">3.2 Association rules</a>
+  <a href="#p3-s3" class="sub">3.3 Algorithms for frequent itemsets</a>
+  <a href="#p3-s4" class="sub">3.4 Hierarchies, multi-dimensional &amp; negative rules, complications</a>
+  <a href="#p3-s5" class="sub">3.5 Classification</a>
+  <a href="#p3-s6" class="sub">3.6 Clustering</a>
+  <a href="#p3-s7" class="sub">3.7 Other data mining approaches</a>
+  <a href="#p3-s8" class="sub">3.8 Applications, tools &amp; future</a>
+  <a href="#p4" class="part">4 · Warehousing &amp; OLAP <span class="tag t23">L23</span><span class="tag t24">L24</span></a>
+  <a href="#p4a" class="sub">4.1 Concepts &amp; architecture</a>
+  <a href="#p4b" class="sub">4.2 Dimensional modelling &amp; the star schema</a>
+  <a href="#p4c" class="sub">4.3 Building &amp; loading the ROLAP structure L24</a>
+  <a href="#p4d" class="sub">4.4 OLAP extensions to SQL L24</a>
+  <a href="#p4e" class="sub">4.5 Tools, OLAP categories &amp; homework L24</a>
+  <a href="#p5" class="part">5 · Connections &amp; exam focus</a>
+  <a href="#p5-s1" class="sub">Cross-lecture links</a>
+  <a href="#p5-s2" class="sub">Discrepancies to remember</a>
+  <a href="#p5-s3" class="sub">Scenario cheat-sheet</a>
+  <a href="#coverage" class="part">Heading coverage map</a>
+</nav>
+
+<main>
+<h1>COS 326 — New Stuff Summary</h1>
+<p class="sub-title">Lectures 20–24 condensed: NewSQL · Big Data technologies · Data mining · Data warehousing &amp; OLAP (1 &amp; 2). Source: the five lecture note files. <span class="tag t20">L20</span><span class="tag t21">L21</span><span class="tag t22">L22</span><span class="tag t23">L23</span><span class="tag t24">L24</span></p><div class="ctl"><button type="button" id="expAll">Expand all</button><button type="button" id="colAll">Collapse all</button></div>
+
+<!-- ===================== BIG PICTURE ===================== -->
+<details class="part" id="big-picture" open><summary class="part-h">Big picture &amp; how the lectures connect</summary><div class="pbody">
+<div class="flow">
+  <div><span class="tag t20">L20</span><b>NewSQL</b>Run transactions (OLTP) with SQL + ACID, scaled out.</div>
+  <div><span class="tag t21">L21</span><b>Big Data tech</b>Store &amp; process huge data: Hadoop → Spark → cloud/streaming.</div>
+  <div><span class="tag t22">L22</span><b>Data mining</b>Turn stored data into knowledge (rules, classes, clusters).</div>
+  <div><span class="tag t23">L23</span><b>Warehousing 1</b>Where analysis data lives: warehouse, star schema.</div>
+  <div><span class="tag t24">L24</span><b>Warehousing 2</b>Build/load it; SQL OLAP extensions.</div>
+</div>
+<ul>
+  <li><span class="tag t20">L20</span> closes the module's data-model story: relational/object-relational (L5–8), XML (L9–10), NoSQL document/graph (L13–19), now <b>NewSQL</b>.</li>
+  <li>Split of work: <b>OLTP</b> (L20, operational) vs <b>OLAP</b> (L23–24, analytical) — HTAP (TiDB) tries to do both.</li>
+  <li><span class="tag t21">L21</span> extends L13 (big data/NoSQL storage) with <i>processing</i>; <span class="tag t22">L22</span> mining runs on that data, on warehouses via OLAP servers.</li>
+</ul>
+
+<!-- ===================== PART 1: L20 ===================== -->
+</div></details><details class="part" id="p1" open><summary class="part-h">1 · Transactions &amp; NewSQL <span class="tag t20">L20</span></summary><div class="pbody">
+<p>Agenda: introduction · motivation · ACID &amp; OLTP · key features/architecture · SQL vs NoSQL vs NewSQL · advantages/limitations/trade-offs · examples · applications &amp; database selection.</p>
+
+<details class="sec" id="p1-s1" open><summary class="sh3">1.1 Introduction &amp; central idea</summary><div class="sbody">
+<div class="key"><b>NewSQL</b> = modern DBMSs for <b>high-performance OLTP</b> that keep the <b>relational model, SQL and ACID</b> while adding <b>horizontal scalability</b> in a modern architecture.</div>
+<ul>
+  <li><b>Problem:</b> traditional relational DBs have mature SQL/transactions but scaling huge transactional loads across servers is architecturally/operationally hard.</li>
+  <li><b>NoSQL response:</b> flexible models, distributed storage, horizontal scaling — but systems differ widely in query languages, data models and transaction guarantees.</li>
+  <li>Bank analogy: single big server = safe but limited; NoSQL = scales but weaker guarantees; NewSQL = safe SQL transactions spread over many servers.</li>
+</ul>
+
+</div></details><details class="sec" id="p1-s2" open><summary class="sh3">1.2 ACID &amp; OLTP</summary><div class="sbody">
+<div class="tbl"><table>
+<tr><th>A — Atomicity</th><th>C — Consistency</th><th>I — Isolation</th><th>D — Durability</th></tr>
+<tr><td>Complete entirely or roll back</td><td>Integrity constraints preserved</td><td>Concurrent transactions behave per isolation guarantees</td><td>Committed changes persist despite failures</td></tr>
+</table></div>
+<p><b>Transfer R500 A→B</b> (<code>BEGIN; debit A; credit B; COMMIT;</code>): crash between debit and credit → rolled back (A); "balance ≥ 0" / money conserved (C); others can't see half-done state (I); survives power loss after commit via logging/replication (D).</p>
+<ul>
+  <li><b>OLTP</b> = operational transactions from apps/users — short, frequent, concurrent. Examples: bank transfers, course registration, online orders, inventory updates, payments/bookings.</li>
+  <li>Why it matters: NewSQL must support demanding transactional loads while keeping reliable processing across distributed infrastructure.</li>
+</ul>
+<div class="tbl"><table>
+<tr><th></th><th>OLTP (this lecture)</th><th>OLAP (L23–24)</th></tr>
+<tr><td>Workload</td><td>Many short reads/writes</td><td>Fewer, long, complex reads</td></tr>
+<tr><td>Example</td><td>"Process this order"</td><td>"Total sales per region over 5 years"</td></tr>
+<tr><td>Priority</td><td>Correctness + speed per transaction</td><td>Throughput over big volumes</td></tr>
+</table></div>
+
+</div></details><details class="sec" id="p1-s3" open><summary class="sh3">1.3 Why NewSQL? Scaling</summary><div class="sbody">
+<div class="tbl"><table>
+<tr><th></th><th>Vertical (scale up)</th><th>Horizontal (scale out)</th></tr>
+<tr><td>Method</td><td>Bigger server (CPU/memory/storage)</td><td>More nodes; distribute data/processing</td></tr>
+<tr><td>Limit</td><td>Hardware ceiling, cost, architecture</td><td>Coordination &amp; network overhead</td></tr>
+<tr><td>Complexity</td><td>Lower (one machine)</td><td>Higher: distribution, transaction coordination, network, consistency</td></tr>
+<tr><td>Failure</td><td>Single point of failure</td><td>Tolerates node failures (with replication)</td></tr>
+</table></div>
+<div class="note"><b>Warning:</b> horizontal scaling does <b>not</b> guarantee linear gains — depends on workload, data distribution, network latency and inter-node coordination (4→8 nodes ≠ 2× throughput when transactions span nodes).</div>
+<p><b>Objective:</b> keep SQL + reliable relational transactions on distributed, multi-server architectures.</p>
+
+</div></details><details class="sec" id="p1-s4" open><summary class="sh3">1.4 Key features of NewSQL</summary><div class="sbody">
+<ul style="list-style:none;padding-left:0">
+  <li>1. SQL &amp; relational management · 2. ACID (even distributed) · 3. Horizontal scalability · 4. Distributed transaction processing (coordinate multi-node txns)</li>
+  <li>5. Partitioning &amp; data distribution · 6. Replication &amp; high availability · 7. Concurrency control (enforces isolation)</li>
+  <li>8. Indexing &amp; query optimisation (indexes cost extra storage, may slow updates) · 9. Crash recovery &amp; durability (logging, replication) · 10. Distributed deployment (servers, data centres, regions)</li>
+</ul>
+<div class="note">Not every product implements these the same way — architecture, consistency, replication and scaling behaviour are system-specific.</div>
+<div class="tbl"><table>
+<tr><th></th><th>Partitioning (sharding)</th><th>Replication</th></tr>
+<tr><td>What</td><td>Data <i>split</i> across nodes</td><td>Same data <i>copied</i> to several nodes</td></tr>
+<tr><td>Goal</td><td>Scalability, parallelism, load spreading</td><td>Availability, fault tolerance, recovery</td></tr>
+<tr><td>Cost</td><td>Cross-partition txns need coordination</td><td>Copies must stay consistent; extra storage</td></tr>
+</table></div>
+<p>Usually combined: e.g. Account table split by account number over 3 nodes, each partition replicated elsewhere. A transfer between accounts on different nodes is a <b>distributed transaction</b> — both nodes commit together or both roll back (the main cost of scaling out).</p>
+
+</div></details><details class="sec" id="p1-s5" open><summary class="sh3">1.5 SQL vs NoSQL vs NewSQL</summary><div class="sbody">
+<div class="tbl"><table>
+<tr><th></th><th>Traditional SQL</th><th>NoSQL</th><th>NewSQL / distributed SQL</th></tr>
+<tr><td>Data model</td><td>Relational tables</td><td>Key-value, document, graph, wide-column…</td><td>Usually relational tables</td></tr>
+<tr><td>Query</td><td>SQL</td><td>System-specific; may be SQL-like/APIs</td><td>SQL</td></tr>
+<tr><td>Schema</td><td>Structured, defined</td><td>Flexible / schema-dependent</td><td>Structured, defined</td></tr>
+<tr><td>Transactions</td><td>ACID common</td><td>Varies by product/scope</td><td>Designed to retain ACID</td></tr>
+<tr><td>Scaling</td><td>Vertical common (some horizontal)</td><td>Horizontal common</td><td>Horizontal is a key goal</td></tr>
+<tr><td>Distribution</td><td>Depends on deployment</td><td>Common</td><td>Designed for distributed deployment</td></tr>
+<tr><td>Use cases</td><td>Enterprise apps, reporting, transactions</td><td>Particular data models / distributed access</td><td>Transaction-intensive + SQL + scale-out</td></tr>
+</table></div>
+<ul>
+  <li><b>Links:</b> MongoDB (document; <code>find</code>/aggregation) and Neo4j (graph; Cypher) from L13–19 are NoSQL. L13's <b>CAP theorem</b> tension (consistency vs availability) is what NewSQL manages when promising ACID across nodes (CockroachDB favours strong consistency).</li>
+  <li>NoSQL varies in models, interfaces and guarantees — not one uniform category.</li>
+</ul>
+
+</div></details><details class="sec" id="p1-s6" open><summary class="sh3">1.6 Advantages &amp; limitations</summary><div class="sbody">
+<div class="grid">
+<div class="card"><b>Advantages</b><ul><li>Familiar SQL &amp; relational structures</li><li>ACID reliability (banking, orders)</li><li>Horizontal scalability (add nodes)</li><li>High availability (replication/fault tolerance)</li><li>Relational integrity (keys, constraints)</li><li>Distributed processing of workloads</li></ul></div>
+<div class="card"><b>Limitations</b><ul><li>Operational complexity (monitoring, config, backup, failures)</li><li>Coordination overhead → latency</li><li>Network dependency</li><li>Cost (infrastructure, licensing, networking, expertise)</li><li>Migration effort (schemas, queries, apps, processes)</li><li>Workload dependence — not necessarily faster than SQL/NoSQL</li></ul></div>
+</div>
+
+</div></details><details class="sec" id="p1-s7" open><summary class="sh3">1.7 Example systems</summary><div class="sbody">
+<div class="tbl"><table>
+<tr><th>System</th><th>Standout features</th><th>Typical application / scenario</th></tr>
+<tr><td><b>VoltDB</b></td><td>In-memory, distributed, partitioned, very high throughput, Kafka integration, replication/recovery</td><td>Telecom usage events + billing, financial transactions</td></tr>
+<tr><td><b>CockroachDB</b></td><td>Distributed SQL; ACID + strong consistency; serializable isolation; auto data distribution/rebalancing; multi-region</td><td>Payments, e-commerce; retailer in several regions</td></tr>
+<tr><td><b>NuoDB</b></td><td>Scale-out across processes/hosts; continuous availability; cloud + on-premises; geo-distributed</td><td>Enterprise app across several sites</td></tr>
+<tr><td><b>TiDB</b></td><td>Open source; MySQL-compatible; strong consistency; <b>HTAP</b> (hybrid transactional + analytical); separated storage/query/cluster components</td><td>Retailer processing orders while analysing recent sales</td></tr>
+<tr><td><b>Altibase</b></td><td>Hybrid in-memory tables + disk tables in one RDBMS (hot data fast, bulk on disk)</td><td>Telecom: current operational data + large history</td></tr>
+</table></div>
+<div class="note">Altibase only <i>illustrates</i> hybrid storage — it doesn't mean all NewSQL systems share a storage design.</div>
+
+</div></details><details class="sec" id="p1-s8" open><summary class="sh3">1.8 Case study — online banking selection</summary><div class="sbody">
+<p>Requirements: millions of accounts, reliable transfers, no inconsistent balances, many concurrent txns, survive server failures, scale, SQL + integrity constraints.</p>
+<ul>
+  <li><b>Why ACID:</b> atomic debit+credit; constraints kept; isolation prevents inconsistent balances; commits survive failures.</li>
+  <li><b>Vertical vs horizontal:</b> bigger server = simple but capped &amp; single point of failure; scale-out handles growth but needs partitioning, coordination, consistency.</li>
+  <li><b>Partitioning + replication:</b> spread load/storage and enable parallelism; copies keep service available and recoverable.</li>
+  <li><b>Cross-node challenges:</b> all-commit-or-all-rollback coordination, network latency/failures (in-doubt txns), cross-node concurrency control, replica consistency.</li>
+  <li><b>Why distributed SQL fits:</b> SQL + integrity + ACID + scale + replication match every requirement. <b>Evaluate first (any two):</b> consistency needs, transaction latency, recovery, security, cost, operational complexity, migration effort.</li>
+</ul>
+
+</div></details><details class="sec" id="p1-s9" open><summary class="sh3">1.9 Summary, homework, questions</summary><div class="sbody">
+<ul>
+  <li><b>Summary:</b> NewSQL = relational + SQL + scalability; ACID matters for reliable transactions; horizontal vs vertical scaling; partitioning/replication/concurrency control/recovery manage load &amp; failure; NoSQL not uniform; NewSQL helps transactional apps but adds coordination/network/operational challenges; choose on workload, guarantees, scalability, availability, cost, operations.</li>
+  <li><b>Homework H1–H4:</b> (H1) ≥4 advantages &amp; 3 limitations; (H2) compare SQL/NoSQL/NewSQL on models, interfaces, transactions, scalability → use table 1.5; (H3) how scale-out + partitioning + replication support a distributed transactional DB (capacity / parallelism / availability, with concurrency control and coordination keeping ACID, at the price of overhead); (H4) justify distributed SQL for the bank + two challenges (cross-node latency, network failures, complexity, cost, migration, security).</li>
+  <li><b>Questions &amp; memo covers:</b> define NewSQL; ACID with transfer example; OLTP examples; vertical vs horizontal; non-linear scaling; partitioning vs replication; distributed transaction; five features; index trade-off; table comparison; 3 pros/3 cons; "always faster?" (no); match system↔feature; HTAP; Altibase caveat; scenarios (telecom → VoltDB, multi-region retailer → CockroachDB, bank factors).</li>
+</ul>
+<div class="note"><b>Exam angle:</b> definition/central idea; ACID worked example; scaling &amp; partition-vs-replication; the comparison table; pros vs cons; match systems to scenarios; banking case (40-mark style) — structure as <i>requirement → feature → trade-off</i>.</div>
+
+<!-- ===================== PART 2: L21 ===================== -->
+</div></details></div></details><details class="part" id="p2" open><summary class="part-h">2 · Big Data technologies (1): Hadoop, Spark, cloud-native &amp; governance <span class="tag t21">L21</span></summary><div class="pbody">
+<p>Agenda: what is Big Data (V5) · sources &amp; characteristics · evolution of architectures · Hadoop legacy &amp; lessons · Spark &amp; cloud-native alternatives · HDFS vs cloud object stores · ethical &amp; legal considerations · Spark practical (no slide detail — see practical sheet). Textbook: Ch 25 (only §25.1 examinable).</p>
+
+<details class="sec" id="p2-s1" open><summary class="sh3">2.1 What is Big Data? — the V5</summary><div class="sbody">
+<p>Data growth from social media, IoT, satellite imagery, app telemetry, eSIM, cloud logs, BI/user analytics. <b>Definition:</b> datasets whose size, speed, diversity or complexity need scalable storage/processing/management/analysis beyond traditional approaches. Suitability depends on data, workload, performance needs and infrastructure — no single best technology.</p>
+<div class="tbl"><table>
+<tr><th>Volume</th><th>Velocity</th><th>Variety</th><th>Veracity</th><th>Value</th></tr>
+<tr><td>TB → zettabytes (L13 said up to yottabytes — same point)</td><td>Real-time ingestion/processing</td><td>Structured, semi-, unstructured</td><td>Trustworthiness &amp; quality</td><td>Business/analytical relevance</td></tr>
+</table></div>
+<p>Telecom illustrates all five (billions of records · fraud screening · calls/SMS/telemetry · duplicate/corrupt records · churn prediction).</p>
+<ul>
+  <li><b>Generation points:</b> mobile devices, microphones, readers/scanners, science facilities, software, social media, cameras, instant messaging.</li>
+  <li><b>Application areas:</b> homeland security, smarter healthcare, multi-channel sales, telecom, manufacturing, traffic control, trading, analytics, search, quality; later list — AI in healthcare, fraud detection, smart cities, IoT analytics, recommendation systems, climate modelling, genomics.</li>
+</ul>
+
+</div></details><details class="sec" id="p2-s2" open><summary class="sh3">2.2 Evolution of architectures</summary><div class="sbody">
+<div class="flow">
+  <div><b>2004 MapReduce</b>Parallel batch processing on clusters</div>
+  <div><b>Hadoop v1/v2 + YARN</b>Resource management + HDFS</div>
+  <div><b>2014+ Spark</b>In-memory, DAG-based, faster</div>
+  <div><b>Now: cloud-native</b>Serverless, autoscaling, object storage</div>
+</div>
+<p>Trend: <b>batch → real-time</b> and <b>on-premises → cloud</b>.</p>
+
+</div></details><details class="sec" id="p2-s3" open><summary class="sh3">2.3 Hadoop — legacy components &amp; lessons</summary><div class="sbody">
+<ul>
+  <li><b>HDFS</b> distributed file system · <b>MapReduce</b> batch programming model · <b>YARN</b> resource management (ResourceManager + NodeManager).</li>
+  <li><b>MapReduce word count:</b> map emits (word,1) → shuffle/sort groups by key → reduce sums. Scales via parallel maps on local data; intermediate results go to disk.</li>
+  <li><b>Limitations:</b> (1) intermediate results written to disk (overhead); (2) iterative algorithms repeatedly read/write; (3) batch, not low-latency/interactive; (4) these pushed adoption of Spark and stream-processing frameworks.</li>
+</ul>
+<div class="note">Hadoop is an <b>ecosystem</b> — don't blame HDFS/YARN for MapReduce's disk-write limitation.</div>
+
+</div></details><details class="sec" id="p2-s4" open><summary class="sh3">2.4 Apache Spark</summary><div class="sbody">
+<ul>
+  <li>Distributed engine for large-scale analytics: SQL, batch, structured streaming, ML, graph. Uses <b>DAGs</b> (stages as nodes, one-way dependencies, no cycles) to represent/schedule work.</li>
+  <li><b>Can</b> cache in memory when beneficial (also uses disk). Reads HDFS and object stores (S3, Azure Blob, Google Cloud Storage). Lower overhead for iterative/interactive jobs than MapReduce.</li>
+</ul>
+<div class="tbl"><table>
+<tr><th></th><th>Hadoop MapReduce</th><th>Spark</th></tr>
+<tr><td>Model</td><td>Map → shuffle → reduce</td><td>DAG of stages</td></tr>
+<tr><td>Intermediate data</td><td>Commonly to disk</td><td>Cached in memory when useful</td></tr>
+<tr><td>Best for</td><td>Batch</td><td>Batch, iterative, interactive, streaming, ML, graph, SQL</td></tr>
+<tr><td>Status</td><td>Foundational, largely legacy</td><td>Modern, widely used</td></tr>
+</table></div>
+
+</div></details><details class="sec" id="p2-s5" open><summary class="sh3">2.5 Storage — HDFS vs cloud object storage</summary><div class="sbody">
+<div class="tbl"><table>
+<tr><th></th><th>HDFS</th><th>Cloud object storage</th></tr>
+<tr><td>Model</td><td>Distributed file system</td><td>Objects in buckets/containers</td></tr>
+<tr><td>Infrastructure</td><td>Usually managed on a cluster</td><td>Managed by cloud provider</td></tr>
+<tr><td>Scaling</td><td>Cluster capacity planning</td><td>Scales via the service</td></tr>
+<tr><td>Access</td><td>File-system interfaces, cluster-based</td><td>API-based</td></tr>
+<tr><td>Cost</td><td>Infrastructure + storage + operations</td><td>Usage-based; request &amp; transfer charges</td></tr>
+<tr><td>Common use</td><td>Hadoop processing</td><td>Data lakes, backups, analytics pipelines</td></tr>
+</table></div>
+
+</div></details><details class="sec" id="p2-s6" open><summary class="sh3">2.6 Ecosystem tools — then vs now</summary><div class="sbody">
+<div class="tbl"><table>
+<tr><th>Legacy</th><th>Modern</th><th>Distinction</th></tr>
+<tr><td>Pig</td><td>Spark SQL, dbt</td><td>Spark SQL processes distributed data; dbt manages SQL transformations</td></tr>
+<tr><td>Hive</td><td>Trino, BigQuery</td><td>Hive = SQL warehousing on Hadoop; others have different distributed query architectures</td></tr>
+<tr><td>Sqoop</td><td>NiFi, Airbyte</td><td>Sqoop moves RDBMS↔Hadoop; others do broader data integration</td></tr>
+<tr><td>HBase</td><td>Cassandra, Cloud Bigtable</td><td>Wide-column NoSQL (L13) with different architectures/consistency models</td></tr>
+</table></div>
+
+</div></details><details class="sec" id="p2-s7" open><summary class="sh3">2.7 Flink · 2.8 Cloud platforms · 2.9 File formats · 2.10 Orchestration · 2.11 Streaming · 2.12 Query engines &amp; ML</summary><div class="sbody">
+<div class="tbl"><table>
+<tr><th>Topic</th><th>Key points</th></tr>
+<tr><td><b>Apache Flink</b></td><td>Distributed framework primarily for <b>stateful stream processing</b>: event-time processing, state management, windows; also batch. Fraud detection, IoT monitoring, real-time analytics (bank flags suspicious activity in seconds). Related: Kafka Streams, Spark Structured Streaming. <i>Stateful</i> = remembers across events; <i>event time</i> = when it happened; <i>window</i> = slice of stream.</td></tr>
+<tr><td><b>Cloud-native</b></td><td><b>AWS:</b> S3, Glue (integration/catalogue), EMR (managed processing), Kinesis (streaming), Redshift (warehouse). <b>Azure:</b> Data Lake Storage, Data Factory, Fabric/Synapse. <b>Google:</b> Cloud Storage, BigQuery, Dataflow, Pub/Sub. <b>Databricks:</b> lakehouse for engineering/analytics/ML. Managed services reduce the need to run every cluster component.</td></tr>
+<tr><td><b>File formats</b></td><td><b>Columnar</b> Parquet, ORC — read only needed columns (analytics). <b>Row-oriented</b> Avro — record exchange, schema-based serialisation. <b>Lake table formats</b> Delta Lake, Iceberg, Hudi — metadata, schema evolution, transactions.</td></tr>
+<tr><td><b>Orchestration</b></td><td>Airflow, Prefect, Dagster — ETL pipelines: dependencies, scheduling, monitoring (retries, alerts).</td></tr>
+<tr><td><b>Streaming</b></td><td><b>Kafka</b> distributed event-streaming (stores/distributes events via topics); <b>Pulsar</b> alternative; <b>Kinesis / Pub/Sub</b> managed ingestion; <b>Flink / Spark Structured Streaming</b> compute on events. Supports replay, continuous processing, event-driven apps. Kafka = the "pipe", Flink = the "brain" (sensors → Kafka → Flink → alert).</td></tr>
+<tr><td><b>Query engines, analytics &amp; ML</b></td><td>Presto/Trino = distributed SQL engines; BigQuery, Snowflake, Databricks SQL = cloud warehouses (serverless, autoscaling, cost-efficient). ML at scale: Spark MLlib, TensorFlow, Vertex AI, SageMaker; unified training/deployment pipelines.</td></tr>
+</table></div>
+
+</div></details><details class="sec" id="p2-s8" open><summary class="sh3">2.13 Governance, security, ethics &amp; legal</summary><div class="sbody">
+<p>Protect data across its lifecycle: collection → storage → processing → sharing → deletion.</p>
+<div class="tbl"><table>
+<tr><th>Area</th><th>Requirement</th></tr>
+<tr><td>Access control</td><td>RBAC or ABAC, least privilege</td></tr>
+<tr><td>Encryption</td><td>In transit and at rest</td></tr>
+<tr><td>Auditing &amp; monitoring</td><td>Record access/admin activity</td></tr>
+<tr><td>Data governance</td><td>Catalogues, ownership, lineage, retention, quality controls</td></tr>
+<tr><td>Privacy &amp; legal</td><td>South Africa's <b>POPIA</b>; EU <b>GDPR</b> where applicable</td></tr>
+</table></div>
+<p><b>Discussion — risks of combining location + purchases + social media to predict behaviour:</b> privacy/re-identification &amp; sensitive inferences · POPIA/GDPR (lawful basis, purpose limitation, consent, profiling) · bias/discrimination · security breach target · inaccurate inferences (veracity) · surveillance/manipulation.</p>
+
+</div></details><details class="sec" id="p2-s9" open><summary class="sh3">2.14 Summary, homework, questions</summary><div class="sbody">
+<ul>
+  <li><b>Summary:</b> batch→real-time, on-prem→cloud; MapReduce/Hadoop foundational but largely legacy; Spark, cloud-native tools and ethical frameworks are essential; postgraduate readiness = hands-on, critical, ethical engagement.</li>
+  <li><b>Homework — telecom case</b> (millions of events/hour: store history; detect suspicious activity live; ML on history; protect subscriber data):
+    <ul><li>(a) history → cloud object storage data lake (Parquet/ORC + Delta/Iceberg); HDFS if on-prem Hadoop exists</li>
+    <li>(b) real-time → Flink or Spark Structured Streaming fed by Kafka/Kinesis/Pub-Sub</li>
+    <li>(c) Spark: Spark SQL batch analysis + MLlib training; DAG + in-memory caching help iteration</li>
+    <li>(d) controls: RBAC/ABAC least privilege; encryption in transit/at rest (also audit, governance, POPIA/GDPR, masking)</li>
+    <li>(e) no single tool: requirements differ (cheap storage / low-latency stateful streams / batch+ML / cross-cutting governance) → combine specialised components</li></ul></li>
+  <li><b>Questions &amp; memo covers:</b> define Big Data + V5; chronological order; Hadoop components; MapReduce limitations; ecosystem caveat; Spark + DAG; Spark not purely in-memory; HDFS vs object store; Pig/Hive/Sqoop/HBase matches; Flink; Kafka vs Flink; AWS/Google services; Parquet vs Avro; Delta/Iceberg/Hudi; Airflow; governance measures; scenarios (retailer risks; why Kafka/Flink <i>and</i> Spark).</li>
+</ul>
+<div class="note"><b>Exam angle:</b> V5; evolution &amp; why MapReduce's disk-based batch design motivated Spark; HDFS vs object storage; tool↔role matching; governance/POPIA/GDPR; telecom-style scenario (<i>requirement → technology → why → trade-off</i>). Also read textbook §25.1 (MapReduce/Hadoop).</div>
+
+<!-- ===================== PART 3: L22 ===================== -->
+</div></details></div></details><details class="part" id="p3" open><summary class="part-h">3 · Data mining concepts <span class="tag t22">L22</span></summary><div class="pbody">
+<p>Agenda: data mining vs warehousing · KDD · goals · types of knowledge · association rules · classification · clustering · other algorithms (sequential, time series, regression, neural networks, genetic algorithms) · applications · tools &amp; future. Textbook: Ch 28.</p>
+
+<details class="sec" id="p3-s1" open><summary class="sh3">3.1 Definition, mining vs warehousing, KDD, goals</summary><div class="sbody">
+<div class="key"><b>Data mining</b> = analysing large datasets to discover useful patterns, relationships, trends and predictive models, using statistics, ML, database systems and pattern recognition to support decisions (items bought together, fraud prediction, customer grouping, demand forecasting).</div>
+<div class="tbl"><table>
+<tr><th></th><th>Data warehousing</th><th>Data mining</th></tr>
+<tr><td>Purpose</td><td>Integrate &amp; organise data for reporting/analysis</td><td>Discover patterns, build predictive/descriptive models</td></tr>
+<tr><td>Activities</td><td>Integration, storage, querying, reporting</td><td>Association rules, classification, clustering, regression</td></tr>
+<tr><td>Output</td><td>Curated datasets, reports, views</td><td>Patterns, rules, clusters, models</td></tr>
+<tr><td>Relation</td><td>Source of historical integrated data</td><td>Can analyse warehouse <i>or</i> other sources</td></tr>
+</table></div>
+<div class="note">A warehouse is <b>not a prerequisite</b> — mining works on operational DBs, data lakes, other datasets if accessible/preparable.</div>
+<h4>KDD — broader, iterative; data mining is one stage</h4>
+<p>① Data selection → ② cleansing (missing/inconsistent/duplicate/incorrect) → ③ enrichment (add data/background knowledge) → ④ transformation (suitable representation) → ⑤ <b>data mining</b> (algorithms) → ⑥ evaluation &amp; presentation. May loop back (e.g. supermarket: select 2025 tills → clean → add category/region → baskets → mine → show strong rules).</p>
+<h4>Goals — PICO (goals, not techniques)</h4>
+<div class="tbl"><table>
+<tr><th>Prediction</th><th>Identification</th><th>Classification</th><th>Optimisation</th></tr>
+<tr><td>Estimate unknown/future outcome (next month's electricity demand)</td><td>Detect presence of item/event (fraudulent transactions)</td><td>Assign to predefined categories (spam vs legit)</td><td>Best use of limited resources under constraints (delivery vehicle allocation)</td></tr>
+</table></div>
+<p>Classification, regression, clustering are <i>techniques</i>; "classification" appears as both goal and technique. <b>Types of discovered knowledge:</b> association rules · classification hierarchies · sequential patterns · patterns within time series · clustering.</p>
+
+</div></details><details class="sec" id="p3-s2" open><summary class="sh3">3.2 Association rules</summary><div class="sbody">
+<ul>
+  <li>From <b>market-basket</b> data (items bought in one visit = itemset). Rule <b>X ⇒ Y</b> (distinct item sets); interesting only if it meets <b>minimum support</b> and <b>minimum confidence</b>.</li>
+  <li><b>Support</b> = % of transactions containing all items of LHS ∪ RHS. <b>Confidence</b> = P(RHS | LHS) = support(LHS ∪ RHS) / support(LHS).</li>
+</ul>
+<p><b>Data:</b> 101 {milk, bread, cookies, juice}; 792 {milk, juice}; 1130 {milk, eggs}; 1735 {bread, cookies, coffee}.</p>
+<div class="tbl"><table>
+<tr><th>Rule</th><th>Support</th><th>Confidence</th></tr>
+<tr><td>milk ⇒ juice</td><td>2/4 = 50%</td><td>2/3 = 66.7%</td></tr>
+<tr><td>bread ⇒ juice</td><td>1/4 = 25%</td><td>1/2 = 50%</td></tr>
+</table></div>
+<p>Support uses the whole DB as denominator; confidence uses LHS transactions. <b>Confidence is not symmetric</b> (juice ⇒ milk = 100%).</p>
+<ul>
+  <li><b>Two steps:</b> (1) find all <b>large/frequent itemsets</b> above support threshold; (2) for itemset X and subset Y, Z = X − Y: rule Z ⇒ Y valid if support(X)/support(Z) &gt; min confidence.</li>
+  <li><b>Search reduction:</b> <b>downward closure</b> — every subset of a frequent itemset is frequent; <b>anti-monotonicity</b> — every superset of an infrequent itemset is infrequent (prune it).</li>
+</ul>
+
+</div></details><details class="sec" id="p3-s3" open><summary class="sh3">3.3 Algorithms for frequent itemsets</summary><div class="sbody">
+<div class="card">
+<b>Apriori</b> (Agrawal &amp; Srikant, 1994) — level-wise: scan for 1-itemset supports → L₁ (≥ mins) → candidates C<sub>k+1</sub> by joining L<sub>k</sub> members sharing k−1 items → prune any with an infrequent size-k subset → scan to count → L<sub>k+1</sub>; stop when empty.
+<p><b>Trace (mins 50%):</b> L₁ = milk(75%), bread, cookies, juice (eggs, coffee 25% dropped). L₂ = {milk,juice}, {bread,cookies} (50% each). Members share no item → C₃ = ∅ → stop. Rules at 70% confidence: juice ⇒ milk 100% ✓, bread ⇒ cookies 100% ✓, cookies ⇒ bread 100% ✓, milk ⇒ juice 66.7% ✗.</p>
+</div>
+<div class="tbl"><table>
+<tr><th>Algorithm</th><th>Main idea</th><th>DB scans</th></tr>
+<tr><td><b>Apriori</b></td><td>Level-wise candidates + downward-closure pruning</td><td>One per level</td></tr>
+<tr><td><b>Sampling</b></td><td>Mine in-memory samples; check superset property by scanning rest. <b>Negative border</b> = minimal itemsets not frequent but all subsets frequent (closest possible extra frequent sets); if one proves frequent → second pass needed</td><td>1–2</td></tr>
+<tr><td><b>FP-tree / FP-growth</b></td><td>Compress DB into tree; no candidate generation. Build: frequent 1-itemsets sorted by count desc, root "null", insert each transaction's frequent items in order (shared prefix → increment count, else new node). FP-growth: single path → combos (support = min node count); else per header item build conditional pattern base/FP-tree and recurse</td><td>2</td></tr>
+<tr><td><b>Partition</b></td><td>Split into non-overlapping partitions → local frequent itemsets → union as global candidates → scan whole DB for global support. A globally frequent itemset is frequent in ≥1 partition</td><td>2</td></tr>
+</table></div>
+<pre><code>FP-tree (min support 2):  null
+ ├─ milk(3) ─┬─ bread(1) ─ cookies(1) ─ juice(1)   ← 101
+ │           └─ juice(1)                            ← 792
+ └─ bread(1) ─ cookies(1)                           ← 1735</code></pre>
+
+</div></details><details class="sec" id="p3-s4" open><summary class="sh3">3.4 Hierarchies, multi-dimensional &amp; negative rules, complications</summary><div class="sbody">
+<ul>
+  <li><b>Hierarchies (taxonomies):</b> items grouped in classes/subclasses (supermarket: beverages [carbonated, non-carbonated: juices, water, wine coolers], desserts [ice cream, baked, frozen yogurt]). "beverages ⇒ desserts" may fail while lower-level rules (healthy frozen yogurt ⇒ bottled water; rich ice cream ⇒ wine cooler) succeed.</li>
+  <li><b>Multi-dimensional:</b> several attributes, e.g. <code>Time(6:30…8:00) ⇒ Items_bought(milk)</code> (support 50%, confidence 100% on the data). Quantitative attributes → non-overlapping intervals (salary bands ⇒ car brands).</li>
+  <li><b>Negative rules:</b> e.g. buyers of "Wakeup" drink unlikely to buy "Nightos" chips — hard because support is very low by definition.</li>
+  <li><b>Complications:</b> huge itemset cardinality · variation by location/season · multi-dimensional item classification · variable data quality (missing, erroneous, conflicting, redundant).</li>
+</ul>
+
+</div></details><details class="sec" id="p3-s5" open><summary class="sh3">3.5 Classification</summary><div class="sbody">
+<ul>
+  <li><b>Supervised</b>: predetermined classes, learned from a pre-classified training set; model = decision tree or rule set.</li>
+  <li><b>Build_tree</b>: all same class → leaf; no attributes left → majority-class leaf; else split on attribute with <b>highest information gain</b> (best separates classes); a branch per value; empty subset → leaf with parent's majority class; recurse on remaining attributes.</li>
+</ul>
+<pre><code>Salary
+├─ &lt; 20K       → no
+├─ 20K–50K     → Age ─ &lt; 25 → no ; &ge; 25 → yes
+└─ &ge; 50K      → yes</code></pre>
+<p>Each root-to-leaf path = one IF…THEN rule (e.g. 20K ≤ salary &lt; 50K AND age ≥ 25 → yes). Salary 35K/age 30 → yes; salary 15K → no.</p>
+
+</div></details><details class="sec" id="p3-s6" open><summary class="sh3">3.6 Clustering</summary><div class="sbody">
+<ul>
+  <li><b>Unsupervised</b>: groups records by similarity (distance measure), no predefined labels. Uses: customer segments, network device traffic, anomalies in security logs.</li>
+  <li><b>K-means</b> (input m records, k): init k centroids (e.g. k-means++) → assign each record to nearest centroid → recompute centroids as means → repeat to convergence. Minimises within-cluster sum of squared distances. Depends on initialisation, k, feature scaling, outliers; suits numeric data, weak on clusters of varied size/density/non-spherical shape.</li>
+  <li>Trace: values 1,2,10,11, k=2, init 1 &amp; 10 → {1,2} / {10,11}; centroids 1.5 and 10.5; no change → converged.</li>
+</ul>
+<div class="tbl"><table>
+<tr><th></th><th>Classification</th><th>Clustering</th></tr>
+<tr><td>Learning</td><td>Supervised</td><td>Unsupervised</td></tr>
+<tr><td>Labels</td><td>Predefined</td><td>None — groups discovered</td></tr>
+<tr><td>Output</td><td>Tree / rules</td><td>Clusters + centroids</td></tr>
+</table></div>
+
+</div></details><details class="sec" id="p3-s7" open><summary class="sh3">3.7 Other data mining approaches</summary><div class="sbody">
+<div class="tbl"><table>
+<tr><th>Approach</th><th>Key points</th><th>Typical goal</th></tr>
+<tr><td><b>Sequential patterns</b></td><td>Time-ordered transactions form sequences of itemsets; support of S = % of sequences containing S as a subsequence (phone → case → screen protector)</td><td>Prediction</td></tr>
+<tr><td><b>Time series</b></td><td>Observations over time (stock prices, hourly electricity, traffic, sales) — trends, seasonality, anomalies, forecasting. Usually numeric; sequential patterns = ordered event sequences; can overlap</td><td>Prediction, trends</td></tr>
+<tr><td><b>Regression</b></td><td>Special application of classification rule: function mapping variables to a target; Y = f(x₁…xₙ); linear f → <b>linear regression</b>. Slide: LAB_TESTS → P (probability of survival)</td><td>Numeric prediction</td></tr>
+<tr><td><b>Neural networks</b></td><td>Layered, weighted units; supervised or unsupervised/self-supervised; images, text, anomaly, forecasting, classification (time series: recurrent, temporal conv., Transformers). Model complex relations but need data/compute and are hard to interpret</td><td>Prediction, classification, identification</td></tr>
+<tr><td><b>Genetic algorithms</b></td><td>Randomised evolution-based search: population → fitness → select → crossover → mutation → new population → repeat. Delivery-route example. Heuristic: no global-optimum guarantee</td><td>Optimisation</td></tr>
+<tr><td>Association rules / classification / clustering</td><td>Unsupervised discovery · supervised · unsupervised segmentation</td><td>Co-occurrence · classification/identification · segmentation/anomalies</td></tr>
+</table></div>
+
+</div></details><details class="sec" id="p3-s8" open><summary class="sh3">3.8 Applications, tools &amp; future</summary><div class="sbody">
+<ul>
+  <li><b>Applications:</b> Marketing (consumer behaviour, advertising, service location, segmentation, targeted mailing) · Finance (fraud, creditworthiness, investment performance) · Manufacturing (optimise men/machines/materials) · Health (image &amp; genetic analysis, drug side effects, treatment effectiveness, cost optimisation).</li>
+  <li><b>Commercial tool techniques:</b> association rules, clustering, neural networks, sequencing, statistics, decision trees, regressions; advanced: GAs, case-based reasoning, Bayesian networks, nonlinear regression, combinatorial optimisation, pattern matching, fuzzy logic.</li>
+  <li><b>Tools:</b> Python (pandas, scikit-learn) · R · Spark MLlib (distributed) · BigQuery ML (model near data) · KNIME (visual workflows). Choose by dataset size, compute, requirements, cost, explainability, integration.</li>
+  <li><b>Future:</b> AI/ML/statistics/optimisation algorithms; mining TB/PB in big-data systems (Mahout on Hadoop, Spark MLlib — L21); data in cloud warehouses accessed through OLAP servers (L23–24); business analytics is Spark's primary goal.</li>
+</ul>
+<p><b>Questions &amp; memo covers:</b> definition; warehouse vs mining; KDD stages; PICO; support/confidence calculations (both directions); two-step rule generation; downward closure; Apriori trace; sampling/negative border; FP-tree trace; partition; hierarchy and multi-dimensional rules; negative rules; complications; decision-tree tracing; clustering vs classification; k-means trace; sequential vs time series; regression; NN pros/cons; GA steps; technique-selection scenario; tools; link to big data.</p>
+<div class="note"><b>Exam angle:</b> KDD + PICO; support/confidence table calculations; tracing Apriori; algorithm descriptions; reading a decision tree into rules; a k-means iteration; picking the right technique for a scenario (name it, justify vs data/goal, note limitations).</div>
+
+<!-- ===================== PART 4: L23 + L24 ===================== -->
+</div></details></div></details><details class="part" id="p4" open><summary class="part-h">4 · Data warehousing &amp; OLAP <span class="tag t23">L23</span><span class="tag t24">L24</span></summary><div class="pbody">
+<p><span class="tag t23">L23</span> agenda: BI &amp; data warehousing · business environment · operational vs informational systems · BI · warehouse architecture &amp; components · data mart and reasons for one · plus (slides) dimensional modelling, star schema, information packages, cube, hierarchies, STARjoin/STARindex/materialised views, SQL.<br>
+<span class="tag t24">L24</span> agenda: continuation · implementing a ROLAP schema · OLAP extensions to SQL · how Oracle supports OLAP · plus slowly changing dimensions, MERGE loading, windowing/ranking, BI tools, OLAP categories, homework. Textbook: Ch 29.</p>
+
+<details class="sec" id="p4a" open><summary class="sh3">4.1 Concepts &amp; architecture</summary><div class="sbody">
+<h4>Business environment <span class="tag t23">L23</span></h4>
+<p>Purpose: make money · sell products/services · to customers · sourced from suppliers/internal · organised by business units/processes · decisions by managers · threats: losing customers, closing down → managers need timely, accurate information (informational systems).</p>
+<h4>Operational vs informational systems <span class="tag t23">L23</span></h4>
+<div class="tbl"><table>
+<tr><th></th><th>Operational (OLTP)</th><th>Informational (OLAP)</th></tr>
+<tr><td>Metaphor</td><td>"Make the wheels turn"</td><td>"Watch the wheels turn"</td></tr>
+<tr><td>Purpose</td><td>Record/process transactions as they happen</td><td>Support informed decisions</td></tr>
+<tr><td>Users</td><td>Shop-floor workers</td><td>Managers, analysts</td></tr>
+<tr><td>Examples</td><td>POS, inventory, general ledger, claims</td><td>"Top-selling products", "problem branches", alerts when below target</td></tr>
+<tr><td>Data</td><td>Current, detailed, application-specific</td><td>Current + historical, integrated, analysis-oriented</td></tr>
+</table></div>
+<p>Running big reports on the live till DB would slow the tills → separate warehouse. Link L20: OLTP = NewSQL's workload; OLAP = analytical counterpart.</p>
+<p><b>Dashboards</b> (day-to-day management): like instruments when driving a car/flying an aircraft — key indicators, trends, comparisons at a glance (trend line of net promoter score, gauges per product line).</p>
+<h4>Business intelligence <span class="tag t23">L23</span></h4>
+<p>Applications &amp; technologies to <b>gather, access and analyse</b> data about business operations → in-depth knowledge of customer/supplier behaviour, sales &amp; production volumes, internal operations → better manager decisions.</p>
+<h4>Why a warehouse is viable for informational systems; definition <span class="tag t23">L23</span></h4>
+<p>(1) data from multiple applications, (2) current + historical content, (3) designed for analysis (key measures &amp; dimensions).</p>
+<div class="key"><b>Data warehouse</b> = collection of data supporting management decisions that is <b>subject-oriented</b> (sales, policies, claims) · <b>integrated</b> (from different operational systems) · <b>non-volatile</b> (read-oriented; updated only via controlled loading/correction) · <b>time-variant</b> (time stored explicitly → day/week/month/quarter/year analysis).</div>
+<h4>Architecture, ETL/ELT &amp; roles <span class="tag t23">L23</span></h4>
+<div class="tbl"><table>
+<tr><th>#</th><th>Component</th><th>#</th><th>Component</th></tr>
+<tr><td>1</td><td>Source data (internal systems; external: suppliers, partners, government)</td><td>6</td><td>Information delivery (data mining, OLAP, reports/queries)</td></tr>
+<tr><td>2</td><td>Data staging — ETL / ELT</td><td>7</td><td>Interactive users</td></tr>
+<tr><td>3</td><td>Enterprise data warehouse (maybe cloud)</td><td>8</td><td>Management &amp; control</td></tr>
+<tr><td>4</td><td>Metadata (data about data)</td><td>9</td><td>Hardware, OS, DBMS</td></tr>
+<tr><td>5</td><td>Data mart</td><td>10</td><td>DB personnel</td></tr>
+</table></div>
+<ul>
+  <li><b>ETL:</b> extract → transform in staging (clean, standardise e.g. M/F vs 1/2, one date format, dedupe) → load. <b>ELT:</b> extract → load raw → transform inside the (cloud) platform (L21).</li>
+  <li><b>Roles:</b> data transformation specialists (extraction/integration/transformation) · warehouse administrators (what data, when, how) · data modellers (relational + dimensional) · business analysts (design/create reports).</li>
+</ul>
+<h4>The data mart <span class="tag t23">L23</span></h4>
+<p>Smaller, focused subset of the warehouse for one department/subject (Sales mart, Finance mart); the star schema lives in the data mart. <i>Reasons (not on slides — check textbook):</i> department focus · faster queries (less data) · quicker/cheaper/lower-risk build · easier for users · access control · departmental ownership.</p>
+
+</div></details><details class="sec" id="p4b" open><summary class="sh3">4.2 Dimensional modelling &amp; the star schema</summary><div class="sbody">
+<h4>Dimensions, questions, information packages <span class="tag t23">L23</span></h4>
+<div class="tbl"><table>
+<tr><th>Business</th><th>Subject</th><th>Dimensions</th></tr>
+<tr><td>Supermarket</td><td>Sales</td><td>Time, branch, product, promotion</td></tr>
+<tr><td>Airline</td><td>Frequent flyers</td><td>Time, customer, flight, fare class, airport</td></tr>
+<tr><td>Hotel chain</td><td>Hotel occupancy</td><td>Time, hotel branch, room type</td></tr>
+</table></div>
+<p>Time is very common (historical analysis) but <b>not compulsory</b>. Example question — <i>"revenue of luxury rooms month by month in Gauteng by hotel branch"</i>: measure = revenue; room type = luxury; time = month; hotel = province Gauteng, level branch → need structure supporting dimensional analysis = star schema.</p>
+<p><b>Information package</b> (one per subject, built while gathering requirements): columns = dimensions with hierarchy levels top → bottom; plus facts. Hotel occupancy: <b>Time</b> Year/Quarter/Month · <b>Hotel</b> Hotel line/Province/Branch · <b>Room type</b> Room type/Size · <b>Facts</b> occupied rooms, vacant rooms, revenue. It maps to dimension tables (columns) + fact table (facts).</p>
+<h4>Star schema = ROLAP <span class="tag t23">L23</span></h4>
+<ul>
+  <li>Central <b>fact table</b> (business event at defined granularity: foreign keys + measures) surrounded by <b>dimension tables</b>; FKs in fact table = one-to-many links. Dimensional view using relational structures and queries (Relational OLAP).</li>
+  <li>Hierarchy levels are denormalised into one wide dimension table (fewer joins).</li>
+</ul>
+<pre><code>OCCUPANCY_FACTS(Time_Key FK, Hotel_Key FK, Room_Key FK, Occupied_rooms, Vacant_rooms, Revenue)
+HOTEL(Hotel_Key PK, Hotel_code, Hotel_Line, Province, Branch)
+RM_TYPE(Room_Key PK, Room_code, Room_Type, Size)
+TIME(Time_Key PK, Time_code, Year, Quarter, Month)</code></pre>
+<pre><code>SELECT h.Province, t.Year, t.Month, SUM(f.Revenue)
+FROM OCCUPANCY_FACTS f
+JOIN HOTEL h ON f.Hotel_Key=h.Hotel_Key
+JOIN RM_TYPE r ON f.Room_Key=r.Room_Key
+JOIN TIME t ON f.Time_Key=t.Time_Key
+WHERE r.Room_Type='Luxury'
+GROUP BY h.Province, t.Year, t.Month;</code></pre>
+<p>Pattern: fact table in <code>FROM</code>, <b>star join</b> to each dimension, <code>WHERE</code> filters on dimension attributes, <code>GROUP BY</code> dimension levels, <code>SUM</code> the measure.</p>
+<h4>Data cube, roll-up &amp; drill-down, performance <span class="tag t23">L23</span></h4>
+<ul>
+  <li><b>Data cube (hypercube):</b> one axis per dimension, each cell one measure value (Feb × Luxury × Gauteng = R20m). Conceptual — not necessarily stored as a cube (ROLAP: tables). 3 months × 2 types × 2 provinces = 12 cells.</li>
+  <li><b>Roll-up</b> = up the hierarchy, more summarised (months → quarter; branch → province → hotel line). <b>Drill-down</b> = down, more detail (quarter → months: Jan 5m + Feb 10m + Mar 5m = Qtr1 20m). The two R20m figures on the slides are different illustrations.</li>
+  <li><b>STARjoin:</b> joins fact table with multiple dimension tables. <b>STARindexes:</b> specialised indexes; <b>bitmap indexes</b> for low-cardinality attributes (e.g. Room_Type). <b>Materialised views:</b> precomputed stored query results; must be refreshed when data changes (speed vs storage/maintenance).</li>
+</ul>
+
+</div></details><details class="sec" id="p4c" open><summary class="sh3">4.3 Building &amp; loading the ROLAP structure <span class="tag t24">L24</span></summary><div class="sbody">
+<h4>Recap <span class="tag t24">L24</span></h4>
+<ul>
+  <li>Dimension tables + fact table for a data mart; a dimension may have several hierarchies (TIME: <code>calendar_rollup</code>, <code>fiscal_rollup</code>).</li>
+  <li><b>Surrogate keys</b> = system-generated (Time_Key, Hotel_Key, Room_Key); distinct from business keys (Hotel_ID, Room_ID, Time_ID). They let a dimension hold <b>multiple historical versions</b> of the same entity (same Hotel_ID, new Hotel_Key).</li>
+</ul>
+<h4>SQL for warehousing <span class="tag t23">L23</span><span class="tag t24">L24</span></h4>
+<div class="tbl"><table>
+<tr><th>Task</th><th>Statements</th></tr>
+<tr><td>Create ROLAP structure</td><td><code>CREATE SEQUENCE</code> (surrogate keys) · <code>CREATE TABLE</code> · <code>CREATE DIMENSION</code> (Oracle-only) · <code>CREATE MATERIALIZED VIEW</code> (speed)</td></tr>
+<tr><td>Load data</td><td><code>MERGE</code> · <code>UPDATE/INSERT</code> (initial + incremental loads)</td></tr>
+<tr><td>Reports</td><td><code>SELECT … GROUP BY CUBE | ROLLUP | GROUPING SETS</code></td></tr>
+</table></div>
+<pre><code>CREATE DIMENSION HOTELS_DIM
+  LEVEL Hotel IS HOTEL.Hotel_ID   LEVEL Province IS HOTEL.Province_ID   LEVEL Hotelline IS HOTEL.Hotelline_ID
+  HIERARCHY Hotel_Rollup (Hotel CHILD OF Province CHILD OF Hotelline)
+  ATTRIBUTE Hotel DETERMINES (Hotel_name, Hotel_address, Hotel_city, ...)
+  ATTRIBUTE Province DETERMINES Province_name   ATTRIBUTE Hotelline DETERMINES Hotelline_desc;</code></pre>
+<p><code>LEVEL … IS</code> = level + identifying column; <code>HIERARCHY … CHILD OF</code> = roll-up path lowest → highest; <code>ATTRIBUTE … DETERMINES</code> = functional dependency. Declares metadata only (helps query rewrite/materialised views); Oracle-specific.</p>
+<h4>Slowly changing dimensions (SCD) <span class="tag t24">L24</span></h4>
+<p>Warehouses keep long history while dimension data (e.g. marital status) changes → need a strategy.</p>
+<div class="tbl"><table>
+<tr><th>Type</th><th>Rule</th><th>History</th></tr>
+<tr><td><b>1</b></td><td>Overwrite the changed value</td><td>Lost (corrections only)</td></tr>
+<tr><td><b>2</b></td><td>New record per change</td><td>Full history (one row per version)</td></tr>
+<tr><td><b>3</b></td><td>Alternate column holds old value in same record</td><td>Limited (previous + current)</td></tr>
+</table></div>
+<p><b>Type 2 example</b> CUSTOMER(Cust_Key, Cust_ID, Eff_start, Eff_end, Cust_sname, Marital_stat): Cust_Key 12345, ID 850002, 01/03/2015–09/03/2018, single, Jones → new row Cust_Key 12347, same ID, from 10/03/2018, end blank (current), married, Charming. Old facts keep pointing to 12345, new ones to 12347. (Type 1: one row "married" — past sales look married. Type 3: extra Prev_marital_stat column.)</p>
+<h4>Loading with MERGE <span class="tag t24">L24</span> <span class="tag t23">L23</span></h4>
+<pre><code>MERGE INTO CUSTOMER C
+USING (SELECT Cust_ID, ... FROM CUST_STG) S
+ON (C.Cust_ID = S.Cust_ID AND C.Marital_Status = S.Marital_stat)
+WHEN MATCHED     THEN UPDATE SET ...        -- type 1 change
+WHEN NOT MATCHED THEN INSERT VALUES (...);  -- type 2 change or new customer</code></pre>
+<ul>
+  <li><b>Initial load</b> (empty dimension → everything NOT MATCHED → inserted) vs <b>incremental loads</b> (updates + inserts). MERGE = "update if exists else insert" in one statement (same idea as Cypher MERGE, L18).</li>
+  <li>Changed marital status ⇒ no match (ON includes status) ⇒ INSERT = Type 2.</li>
+  <li><div class="note" style="margin:4px 0">Caution: a full Type 2 load also needs to set End_date on the old row and take a new surrogate key from the sequence (extra UPDATE step).</div></li>
+</ul>
+
+</div></details><details class="sec" id="p4d" open><summary class="sh3">4.4 OLAP extensions to SQL <span class="tag t24">L24</span></summary><div class="sbody">
+<ul>
+  <li><b>Why:</b> plain SQL can't easily do % change vs a year ago, moving averages, cumulative sums, statistics. ANSI added OLAP functions (SQL:1999 amendment → SQL:2003; slides also say "since SQL 2008" for CUBE/ROLLUP/GROUPING SETS — dates inconsistent; point is they're standard and widely supported).</li>
+  <li><b>Capabilities:</b> extended grouping (<code>ROLLUP</code>, <code>CUBE</code>, <code>GROUPING SETS</code>) · windowing (cumulative/moving SUM, AVG, MIN, COUNT over row ranges) · ranking (RANK, DENSE_RANK, cumulative distribution, percent rank, N-tiles: quartiles/deciles/percentiles).</li>
+</ul>
+<h4>Extended grouping</h4>
+<p>Traditional query <code>GROUP BY province, month</code> gives one grouping only, no subtotals (would need several queries + UNION).</p>
+<div class="tbl"><table>
+<tr><th>Operation</th><th>Purpose</th><th>Groups for (province, month)</th></tr>
+<tr><td><b>CUBE</b></td><td>All combinations</td><td>(p,m), (p), (m), grand total — 2² = 4</td></tr>
+<tr><td><b>ROLLUP</b></td><td>Hierarchical subtotals + grand total, right to left</td><td>(p,m), (p), grand total</td></tr>
+<tr><td><b>GROUPING SETS</b></td><td>Only listed groupings; <code>()</code> = grand total</td><td>e.g. ((p,m),(p),()) = same as ROLLUP</td></tr>
+</table></div>
+<p><b>Example</b> (Gauteng Jan 10, Feb 20; KZN Jan 5, Feb 15): ROLLUP = 7 rows (4 detail + Gauteng 30 + KZN 20 + grand 50); CUBE = 9 rows (adds month totals Jan 15, Feb 35). <code>NULL</code> = summarised level; <code>GROUPING(col)</code> = 1 for subtotal NULLs, 0 for real data.</p>
+<h4>Windowing</h4>
+<ul>
+  <li>3-month moving average of 1,4,1,2,3,4 → Mar 2, Apr 7/3 ≈ 2.33, May 2, Jun 3 (first two months lack full history on the slide table).</li>
+  <li>SQL: <code>AVG(SUM(saleAmount)) OVER (ORDER BY yearMonth ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)</code> — inner SUM + <code>GROUP BY</code> gives monthly totals; <code>OVER</code> sorts and defines frame = current + 2 previous rows. Results for B003: avg 21,000 / 28,000 / 32,000 / 39,000 / 42,000 / 43,000; sums 21,000 / 56,000 / 96,000 / 117,000 / 126,000 / 129,000 (SQL uses available rows for Jan/Feb).</li>
+</ul>
+<h4>Ranking</h4>
+<p><code>RANK() OVER (ORDER BY SUM(saleAmount) DESC)</code> / <code>DENSE_RANK()</code>. Pretoria branches: B009 120m (1,1); B018/B022/B028 92m (2,2); B033 45m (<b>RANK 5</b>, <b>DENSE 3</b>); B046 42m (6, 4). RANK leaves gaps after ties; DENSE_RANK doesn't. (Qualify <code>Branch.branchNo</code> to avoid ambiguity.)</p>
+
+</div></details><details class="sec" id="p4e" open><summary class="sh3">4.5 Tools, OLAP categories &amp; homework <span class="tag t24">L24</span></summary><div class="sbody">
+<div class="grid">
+<div class="card"><b>Modern DW &amp; BI tools</b><ul><li>Data warehousing: Oracle Autonomous Data Warehouse</li><li>Integration: Oracle Data Integration</li><li>Development: Oracle SQL Developer</li><li>BI: Power BI, Tableau, Oracle Analytics Cloud</li><li>Open-source BI: Apache Superset</li></ul><small>Compare L21 cloud platforms (BigQuery, Redshift, Snowflake, Databricks).</small></div>
+<div class="card"><b>OLAP tool categories</b><ul><li><b>MOLAP</b> — multidimensional (cube) storage, fast, precomputed</li><li><b>ROLAP</b> — dimensional view on relational tables (this module)</li><li><b>HOLAP</b> — hybrid (detail relational, summaries cube)</li><li><b>DOLAP</b> — desktop OLAP, local cubes</li></ul><small>Category descriptions added; slide gives names only.</small></div>
+</div>
+<h4>Homework</h4>
+<ul>
+  <li><b>(1) Open-source &amp; BI:</b> research PostgreSQL <i>or</i> MySQL and OLAP. Pointers: PostgreSQL has ROLLUP/CUBE/GROUPING SETS, window functions, materialised views; MySQL 8+ has window functions and <code>WITH ROLLUP</code> but lacks CUBE/GROUPING SETS and native materialised views; neither has <code>CREATE DIMENSION</code>; Superset as front-end. Verify against official docs.</li>
+  <li><b>(2) SQL tasks</b> (hotel schema): ① TIME table + <code>CREATE DIMENSION</code> with hierarchy DAY → MONTH → QUARTER → YEAR (slide text missing an arrow) · ② revenue per hotel per month with <code>GROUP BY CUBE (Hotel_ID, Month_ID)</code> → detail, hotel totals, month totals, grand total · ③ per hotel per quarter with <code>ROLLUP (Hotel_ID, Quarter_ID)</code> → detail, hotel subtotal, grand total (column order matters) · ④ <code>GROUPING SETS ((Hotel,Month),(Room_Type,Month),(Hotel,Room_Type,Month))</code> → only those three groupings, NULL = column absent.</li>
+</ul>
+<p><b>Questions &amp; memo covers:</b> <span class="tag t23">L23</span> operational vs informational; BI; why warehouse; four characteristics; components; ETL vs ELT; roles; dimensions per business; time dimension; question analysis; information package; data mart; star schema design + SQL; cube; roll-up/drill-down tracing; STARjoin/index/materialised views; CREATE DIMENSION; ROLLUP vs CUBE groupings; scenario (slow tills → warehouse/mart). <span class="tag t24">L24</span> surrogate keys; ROLAP statements; CREATE DIMENSION clauses; why SCD; Types 1/2/3; Type 2 tracing; initial vs incremental load; MERGE tracing; plain-SQL gaps; CUBE/ROLLUP/GROUPING SETS rows (9 vs 7); <code>()</code>; moving average; window syntax; RANK vs DENSE_RANK; N-tiles/BI tools; OLAP categories; homework-style code; scenario (ROLLUP + RANK).</p>
+<div class="note"><b>Exam angle:</b> OLTP vs OLAP; four warehouse characteristics; architecture/ETL vs ELT/roles; info package → star schema + star-join SQL; roll-up vs drill-down; STARjoin/bitmap/materialised views; surrogate keys; SCD 1/2/3 before-after tables; MERGE logic; predicting rows/NULLs of CUBE/ROLLUP/GROUPING SETS; moving averages; RANK vs DENSE_RANK; MOLAP/ROLAP/HOLAP/DOLAP. Scenario: identify subject, dimensions, hierarchies, measures → design schema.</div>
+
+<!-- ===================== PART 5 ===================== -->
+</div></details></div></details><details class="part" id="p5" open><summary class="part-h">5 · Connections &amp; exam focus</summary><div class="pbody">
+<details class="sec" id="p5-s1" open><summary class="sh3">Cross-lecture links</summary><div class="sbody">
+<div class="tbl"><table>
+<tr><th>From</th><th>To</th><th>Link</th></tr>
+<tr><td><span class="tag t20">L20</span> OLTP</td><td><span class="tag t23">L23</span> operational systems</td><td>Same OLTP workload; OLAP is its analytical counterpart. TiDB's HTAP bridges both.</td></tr>
+<tr><td><span class="tag t20">L20</span> NoSQL comparison</td><td>L13–19 (MongoDB, Neo4j)</td><td>NoSQL varies in model/query/transactions; CAP trade-off explains NewSQL's strong-consistency choices.</td></tr>
+<tr><td><span class="tag t20">L20</span> Kafka integration (VoltDB)</td><td><span class="tag t21">L21</span> streaming</td><td>Kafka = event pipe feeding real-time transaction/stream engines.</td></tr>
+<tr><td><span class="tag t21">L21</span> big data / V5 / HBase, Cassandra</td><td>L13 big data &amp; NoSQL</td><td>Wide-column stores; L21 adds the processing side.</td></tr>
+<tr><td><span class="tag t21">L21</span> Spark MLlib, Mahout</td><td><span class="tag t22">L22</span> tools &amp; future</td><td>Mining at TB/PB scale uses big-data libraries; business analytics is Spark's goal.</td></tr>
+<tr><td><span class="tag t21">L21</span> ELT, cloud warehouses (BigQuery, Redshift)</td><td><span class="tag t23">L23</span> ETL/ELT; <span class="tag t24">L24</span> modern tools</td><td>Cloud warehouses load raw then transform in-platform.</td></tr>
+<tr><td><span class="tag t22">L22</span> data mining</td><td><span class="tag t23">L23</span> warehouse</td><td>Mining can use a warehouse (but doesn't need one); warehouse feeds "information delivery" (data mining, OLAP, reports); OLAP servers bring cloud-warehouse data to mining.</td></tr>
+<tr><td><span class="tag t23">L23</span> CREATE DIMENSION, MERGE, GROUP BY ROLLUP/CUBE</td><td><span class="tag t24">L24</span></td><td>L23 introduces the statements; L24 explains them in depth, adds SCD, windowing, ranking. L18's Cypher MERGE = same match-or-create idea.</td></tr>
+<tr><td><span class="tag t23">L23</span> star schema, hierarchies</td><td><span class="tag t24">L24</span> surrogate keys, hierarchies</td><td>Same hotel schema; surrogate keys enable SCD Type 2 versions.</td></tr>
+</table></div>
+</div></details><details class="sec" id="p5-s2" open><summary class="sh3">Discrepancies to remember</summary><div class="sbody">
+<ul>
+  <li>L21 volume "TB→zettabytes" vs L13 "up to yottabytes" — same point (enormous scale).</li>
+  <li>L22: "classification" is both a PICO <i>goal</i> and a mining <i>technique</i>.</li>
+  <li>L24: SQL OLAP standardisation dates inconsistent (SQL:1999/2003 vs "since SQL 2008"); L24 <code>MERGE</code> slide is a simplified Type 2 pattern; homework hierarchy typo (missing arrow).</li>
+  <li>L23: data-mart reasons aren't on the slides (read textbook).</li>
+</ul>
+</div></details><details class="sec" id="p5-s3" open><summary class="sh3">Scenario cheat-sheet</summary><div class="sbody">
+<div class="tbl"><table>
+<tr><th>Scenario cue</th><th>Reach for</th></tr>
+<tr><td>Bank/e-commerce needing SQL + ACID + scale-out</td><td>Distributed SQL / NewSQL (CockroachDB, TiDB, NuoDB)</td></tr>
+<tr><td>Telecom events, very high throughput, billing</td><td>VoltDB (or Altibase if history on disk too)</td></tr>
+<tr><td>Real-time fraud/IoT alerting</td><td>Kafka + Flink / Spark Structured Streaming</td></tr>
+<tr><td>Long-term cheap history + ML</td><td>Cloud object store data lake (Parquet + Delta/Iceberg) + Spark SQL/MLlib</td></tr>
+<tr><td>Subscriber data protection</td><td>RBAC/ABAC least privilege, encryption, audit, POPIA/GDPR</td></tr>
+<tr><td>Products bought together</td><td>Association rules (Apriori / FP-growth)</td></tr>
+<tr><td>Good/bad risk from labelled history</td><td>Classification (decision tree)</td></tr>
+<tr><td>Customer segments, anomalies</td><td>Clustering (k-means)</td></tr>
+<tr><td>Delivery routing under constraints</td><td>Genetic algorithm (optimisation)</td></tr>
+<tr><td>Forecast hourly demand</td><td>Time series / regression / neural networks</td></tr>
+<tr><td>Heavy analysis slows the tills</td><td>Warehouse/data mart via ETL/ELT, star schema</td></tr>
+<tr><td>Dimension attribute changes, need history</td><td>SCD Type 2 (surrogate key + effective dates)</td></tr>
+<tr><td>Subtotals + grand total / all combos / chosen groupings</td><td>ROLLUP / CUBE / GROUPING SETS</td></tr>
+<tr><td>Moving average, ranking with ties</td><td>Window functions; RANK vs DENSE_RANK</td></tr>
+</table></div>
+
+<!-- ===================== COVERAGE ===================== -->
+</div></details></div></details><details class="part" id="coverage" open><summary class="part-h">Heading coverage map</summary><div class="pbody">
+<p>Every top-level heading from the five note files and where it appears above.</p>
+<div class="tbl"><table>
+<tr><th>Lecture</th><th>Source headings</th><th>Section</th></tr>
+<tr><td><span class="tag t20">L20</span></td><td>1 Overview · 2 Introduction · 3 ACID &amp; OLTP · 4 Why NewSQL / scaling · 5 Key features (+partitioning vs replication) · 6 SQL vs NoSQL vs NewSQL · 7 Advantages &amp; limitations · 8 Examples (VoltDB, CockroachDB, NuoDB, TiDB, Altibase) · 9 Banking case study · 10 Summary · 11 Homework · 12 Questions &amp; Memo</td><td>1.1–1.9</td></tr>
+<tr><td><span class="tag t21">L21</span></td><td>1 Overview · 2 What is Big Data (V5, generation points, applications) · 3 Evolution · 4 Hadoop · 5 Spark · 6 HDFS vs object storage · 7 Ecosystem tools · 8 Flink · 9 Cloud-native · 10 File formats · 11 Orchestration · 12 Streaming · 13 Query engines/analytics/ML · 14 Governance &amp; ethics · 15 Applications · 16 Summary · 17 Homework · 18 Questions &amp; Memo</td><td>2.1–2.14</td></tr>
+<tr><td><span class="tag t22">L22</span></td><td>1 Overview · 2 Definition, vs warehousing, KDD, PICO, types of knowledge · 3 Association rules · 4 Frequent-itemset algorithms (Apriori, Sampling, FP-tree, Partition) · 5 Hierarchies, multi-dimensional, negative rules, complications · 6 Classification · 7 Clustering (k-means) · 8 Other approaches (sequential, time series, regression, NN, GA) · 9 Applications · 10 Tools &amp; future · 11 Questions &amp; Memo</td><td>3.1–3.8</td></tr>
+<tr><td><span class="tag t23">L23</span></td><td>1 Overview · 2 Business environment · 3 Operational vs informational (+dashboards) · 4 BI · 5 Why warehousing viable · 6 Definition · 7 Architecture (+ETL/ELT) · 8 Roles · 9 Dimensional modelling (dimensions, questions, information packages) · 10 Data mart · 11 Star schema (+SQL) · 12 Data cube · 13 Roll-up/drill-down · 14 STARjoin/STARindex/materialised views · 15 SQL for warehousing (CREATE DIMENSION, MERGE, ROLLUP/CUBE/GROUPING SETS) · 16 Questions &amp; Memo</td><td>4.1–4.3 (+4.5)</td></tr>
+<tr><td><span class="tag t24">L24</span></td><td>1 Overview · 2 Recap ROLAP · 3 SQL statements (SEQUENCE, DIMENSION) · 4 Slowly changing dimensions · 5 Loading &amp; MERGE · 6 Why SQL extensions · 7 CUBE/ROLLUP/GROUPING SETS · 8 Windowing &amp; ranking · 9 Modern tools · 10 OLAP categories · 11 Homework · 12 Questions &amp; Memo</td><td>4.3–4.5</td></tr>
+</table></div>
+
+</div></details></main>
+</div>
+
+<script>
+(function(){
+  function openFor(id){
+    var el=document.getElementById(id); if(!el)return;
+    var n=el; while(n){ if(n.tagName==='DETAILS')n.open=true; n=n.parentElement; }
+    setTimeout(function(){el.scrollIntoView({block:'start'});},30);
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href').slice(1); if(!document.getElementById(id))return;
+      e.preventDefault(); history.replaceState(null,'','#'+id); openFor(id);
+    });
+  });
+  if(location.hash) openFor(location.hash.slice(1));
+  function setAll(o){document.querySelectorAll('details').forEach(function(d){d.open=o;});}
+  document.getElementById('expAll').onclick=function(){setAll(true);};
+  document.getElementById('colAll').onclick=function(){setAll(false);};
+  window.addEventListener('beforeprint',function(){setAll(true);});
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('navT');
+  function set(off){ document.body.classList.toggle('nav-off',off); b.setAttribute('aria-expanded',String(!off)); b.title=(off?'Show':'Hide')+' contents (Ctrl+B)'; try{localStorage.setItem('navOff',off?'1':'0');}catch(e){} }
+  var saved=null; try{saved=localStorage.getItem('navOff');}catch(e){}
+  set(saved==='1');
+  var mq=window.matchMedia('(max-width:900px)');
+  b.addEventListener('click',function(){ if(mq.matches){ document.body.classList.toggle('nav-open'); } else { set(!document.body.classList.contains('nav-off')); } });
+  document.addEventListener('click',function(e){ if(!document.body.classList.contains('nav-open'))return; if(e.target.closest('nav a')||(!e.target.closest('nav')&&!e.target.closest('#navT')))document.body.classList.remove('nav-open'); });
+  document.addEventListener('keydown',function(e){ if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&!e.altKey&&e.key.toLowerCase()==='b'){ e.preventDefault(); b.click(); } });
+})();
+</script>
+<script>
+(function(){
+  function setAll(o){document.querySelectorAll('details').forEach(function(d){d.open=o;});}
+  document.getElementById('expAll2').onclick=function(){setAll(true);};
+  document.getElementById('colAll2').onclick=function(){setAll(false);window.scrollTo({top:0,behavior:'smooth'});};
+  var c1=document.getElementById('colAll'); if(c1){var old=c1.onclick; c1.onclick=function(){old&&old();window.scrollTo({top:0,behavior:'smooth'});};}
+})();
+</script>
+<script id="gloss">(function(){
+var G=[
+/* ---------- L20 NewSQL ---------- */
+["NewSQL","Class of modern databases built for high-performance OLTP that keep the relational model, SQL and ACID guarantees while scaling out across many servers."],
+["OLTP|Online Transaction Processing","Online Transaction Processing: many short, frequent, concurrent operational transactions (bank transfers, orders, bookings). Priority is correctness and speed per transaction."],
+["OLAP|Online Analytical Processing","Online Analytical Processing: fewer, long, complex read queries over large historical data (e.g. total sales per region over 5 years). Used by managers and analysts."],
+["ACID","The four transaction guarantees: Atomicity, Consistency, Isolation, Durability."],
+["Atomicity|atomic","A transaction completes entirely or not at all; if it fails part-way all its changes are rolled back."],
+["Isolation","Concurrent transactions behave as if they ran separately; one cannot see another's half-finished changes."],
+["Durability|durable","Once a transaction is committed its changes survive failures (power loss, crash) thanks to logging/replication."],
+["horizontal scaling|scale out|scaling out","Adding more servers/nodes and spreading data and work across them. Raises total capacity but adds coordination, network and consistency challenges."],
+["vertical scaling|scale up|scaling up","Making one server bigger (more CPU, memory, storage). Simple but limited by hardware and cost, and a single point of failure."],
+["partitioning|sharding","Splitting data into pieces stored on different nodes so load and storage are spread and work runs in parallel (scalability)."],
+["replication","Keeping copies of the same data on several nodes for fault tolerance, availability and recovery."],
+["distributed transaction","A transaction touching data on more than one node; the nodes must all commit or all roll back, which adds latency and complexity."],
+["concurrency control","Mechanisms that coordinate simultaneous transactions to protect data integrity and enforce isolation."],
+["high availability","The system keeps serving requests when some servers fail, usually through replication."],
+["fault tolerance","Ability to keep working (or recover quickly) when components fail."],
+["HTAP|Hybrid Transactional and Analytical Processing","Hybrid Transactional and Analytical Processing: one platform handles both operational transactions and analytics (e.g. TiDB)."],
+["CAP theorem|CAP","In a network partition a replicated system cannot guarantee both Consistency and Availability; Partition tolerance means still working despite communication failures."],
+["serializable isolation","Strongest standard isolation level: the outcome is as if transactions ran one after another (used by CockroachDB)."],
+["in-memory","Keeping data in RAM instead of on disk, giving much lower latency (VoltDB, Altibase hot data)."],
+["VoltDB","NewSQL system: in-memory, distributed, partitioned, very high throughput; integrates with Kafka. Used for telecom events and financial transactions."],
+["CockroachDB","Distributed SQL database with ACID, strong consistency, serializable isolation, automatic rebalancing and multi-region deployment."],
+["NuoDB","Distributed SQL database that scales out across processes/hosts; runs in the cloud or on-premises and across sites."],
+["TiDB","Open-source, MySQL-compatible distributed SQL database supporting HTAP, with storage, query and cluster management as separate components."],
+["Altibase","RDBMS with a hybrid design: in-memory tables for hot data plus disk-based tables for larger/less-used data."],
+["rolled back|rollback|roll back","Undoing all changes made by an uncommitted or failed transaction."],
+["commit","Making a transaction's changes permanent."],
+["NoSQL","'Not only SQL': non-relational systems (key-value, document, wide-column, graph) with flexible schemas and horizontal scaling; guarantees vary by product."],
+/* ---------- L21 Big Data ---------- */
+["Big Data","Datasets whose size, speed, variety or complexity needs scalable storage and processing beyond traditional approaches."],
+["V5","The five Vs of Big Data: Volume, Velocity, Variety, Veracity, Value."],
+["Volume","Big Data V: the sheer scale of data (terabytes to zettabytes)."],
+["Velocity","Big Data V: speed of data generation, ingestion and processing (real-time)."],
+["Variety","Big Data V: mix of structured, semi-structured and unstructured data."],
+["Veracity","Big Data V: trustworthiness, quality and credibility of the data."],
+["MapReduce","2004 batch programming model: map tasks emit key/value pairs in parallel, shuffle groups by key, reduce tasks aggregate. Writes intermediate data to disk."],
+["Hadoop","Ecosystem for distributed storage and batch processing on commodity clusters (HDFS + MapReduce + YARN, plus tools like Hive and HBase)."],
+["HDFS","Hadoop Distributed File System: stores very large files across a cluster."],
+["YARN","Hadoop resource manager (ResourceManager + NodeManager) that allocates cluster resources to jobs."],
+["Spark|Apache Spark","Distributed engine for large-scale analytics (SQL, batch, streaming, ML, graph). Uses a DAG and can cache data in memory, so it is faster than MapReduce for iterative work."],
+["DAG|directed acyclic graph","Directed acyclic graph: stages as nodes with one-way dependencies and no cycles; Spark uses it to schedule and optimise a job."],
+["Flink|Apache Flink","Framework for stateful stream processing with event-time handling and windows; used for fraud detection and IoT monitoring."],
+["Kafka|Apache Kafka","Distributed event-streaming platform that stores and distributes event records through topics (the 'pipe'; Flink/Spark do the computing)."],
+["Pulsar","Alternative distributed messaging / event-streaming platform to Kafka."],
+["Kinesis","AWS managed service for streaming data ingestion."],
+["Pub/Sub","Google Cloud managed messaging service for streaming ingestion and distribution."],
+["stateful","The engine remembers information between events (e.g. how many transactions this card made in the last 5 minutes)."],
+["event time|event-time","When an event actually happened (not when it arrived); matters when events arrive late or out of order."],
+["streaming","Processing data continuously as it arrives, for real-time or near-real-time results."],
+["batch processing|batch","Processing large stored datasets in bulk jobs; high latency, not for interactive use."],
+["object storage|object store|object stores","Cloud storage that holds objects in buckets/containers accessed by API (S3, Azure Blob, Cloud Storage); scales via the provider, usage-based pricing."],
+["data lake","Large store of raw data (often in cloud object storage) kept for later analytics and ML."],
+["lakehouse","Platform combining data-lake storage with warehouse-style table management and analytics (e.g. Databricks)."],
+["columnar","Storing data by column so queries reading a few columns from huge tables read far less data (Parquet, ORC)."],
+["Parquet","Columnar file format, efficient for analytical queries on selected columns."],
+["ORC","Columnar file format from the Hadoop world, efficient for analytics."],
+["Avro","Row-oriented, schema-based format used for record exchange and serialization."],
+["Delta Lake","Table format adding metadata management, schema evolution and transactions on top of data-lake files."],
+["Iceberg","Lake table format adding metadata, schema evolution and transactional operations."],
+["Hudi","Lake table format adding metadata, schema evolution and transactional operations."],
+["Airflow","Workflow orchestrator for ETL pipelines: dependencies, scheduling, monitoring and retries."],
+["orchestration|orchestrator","Running pipeline steps in the right order, with scheduling, dependency handling, retries and alerts."],
+["Trino","Distributed SQL query engine for querying data where it lives."],
+["BigQuery","Google's serverless cloud data warehouse."],
+["Snowflake","Cloud data warehouse platform."],
+["Redshift","AWS cloud data warehouse."],
+["Databricks","Lakehouse platform for data engineering, analytics and ML (built around Spark)."],
+["MLlib|Spark MLlib","Spark's distributed machine-learning library."],
+["Hive","Legacy SQL-based data warehousing on Hadoop (modern alternatives: Trino, BigQuery)."],
+["Pig","Legacy Hadoop scripting tool for data transformation (modern: Spark SQL, dbt)."],
+["Sqoop","Legacy tool for moving data between relational databases and Hadoop (modern: NiFi, Airbyte)."],
+["HBase","Hadoop-era distributed wide-column NoSQL database (alternatives: Cassandra, Cloud Bigtable)."],
+["Cassandra","Distributed wide-column NoSQL database."],
+["dbt","Tool that manages SQL-based data transformations inside a warehouse."],
+["serverless","Cloud services where the provider manages servers and scaling; you pay per use."],
+["autoscaling","Resources grow or shrink automatically with the workload."],
+["RBAC|role-based access control","Role-Based Access Control: permissions are granted to roles (e.g. fraud analyst), and users get roles."],
+["ABAC|attribute-based access control","Attribute-Based Access Control: access decided from attributes of the user, data and context."],
+["least privilege","Give each user or service only the permissions it needs, nothing more."],
+["data lineage","Being able to trace where a number or dataset came from (source tables and transformations)."],
+["data governance","Catalogues, ownership, lineage, retention policies and quality controls over data."],
+["POPIA","South Africa's Protection of Personal Information Act governing the processing of personal data."],
+["GDPR","EU General Data Protection Regulation, applying to personal data of people in the EU."],
+/* ---------- L22 Data mining ---------- */
+["data mining","Analysing large datasets to discover useful patterns, relationships, trends and predictive models, to support decisions."],
+["KDD|Knowledge Discovery in Databases","Knowledge Discovery in Databases: the broader, iterative process (selection, cleansing, enrichment, transformation, mining, evaluation); data mining is one stage."],
+["PICO","Goals of data mining: Prediction, Identification, Classification, Optimisation."],
+["association rule|association rules","Rule X ⇒ Y found in market-basket data, valid if it meets minimum support and confidence."],
+["market basket|market-basket","The set of items a customer buys in one visit."],
+["itemset","A set of items (e.g. {milk, bread}) bought together."],
+["frequent itemset|frequent itemsets|large itemset|large itemsets","An itemset whose support is at least the minimum support."],
+["support","Percentage of all transactions containing every item in the rule (LHS ∪ RHS)."],
+["confidence","For A ⇒ B: P(B | A) = support(A ∪ B) / support(A). Not symmetric."],
+["Apriori","Level-wise algorithm: generate candidate itemsets of size k+1 from frequent size-k ones, prune using downward closure, count support, repeat until none remain."],
+["downward closure","Every subset of a frequent itemset is also frequent."],
+["anti-monotonicity","Every superset of an infrequent itemset is also infrequent, so it can be pruned without counting."],
+["negative border","Minimal itemsets that are not frequent but whose subsets are all frequent; used by the sampling algorithm to check for a missed frequent set."],
+["FP-tree|frequent-pattern tree","Compressed prefix tree of the transaction database (items sorted by count) that lets frequent itemsets be mined without generating candidates."],
+["FP-growth","Mining step of the FP-tree algorithm: builds conditional pattern bases/trees and recurses to find frequent patterns."],
+["classification","Supervised learning: learn a model (decision tree or rules) from pre-classified training data to assign records to predefined classes."],
+["decision tree","Tree of attribute tests; each root-to-leaf path is a classification rule (IF … AND … THEN class)."],
+["information gain","How much an attribute reduces uncertainty about the class; the highest-gain attribute is chosen as the split."],
+["clustering","Unsupervised learning: group similar records without predefined labels."],
+["k-means","Clustering algorithm: pick k centroids, assign points to nearest centroid, recompute centroids as means, repeat until stable."],
+["centroid","The mean point (centre) of a cluster."],
+["supervised","Learning from labelled examples with known target classes/outputs."],
+["unsupervised","Learning patterns from data without predefined labels."],
+["sequential pattern|sequential patterns","Frequently occurring ordered sequences of itemsets over time (e.g. phone → case → screen protector)."],
+["time series","Observations recorded over time; analysed for trends, seasonality, anomalies and forecasting."],
+["regression","Estimating a numeric dependent variable from independent variables; linear regression fits a linear function."],
+["neural network|neural networks","Layered model of connected units with learned weights; handles complex relationships but needs lots of data and is hard to interpret."],
+["genetic algorithm|genetic algorithms","Randomised, evolution-inspired search (population, fitness, selection, crossover, mutation) for optimisation; heuristic, no guarantee of the global optimum."],
+["fitness function","In a genetic algorithm, the score that decides which candidate solutions survive."],
+["KNIME","Visual, workflow-based data-preparation and modelling tool."],
+["Mahout","Machine-learning library that runs on Hadoop."],
+/* ---------- L23-24 Warehousing ---------- */
+["data warehouse","Subject-oriented, integrated, non-volatile, time-variant collection of data supporting management decisions."],
+["data mart","Smaller, focused subset of a warehouse for one department or subject (the star schema usually lives here)."],
+["subject-oriented","Organised around business subjects such as sales, policies or claims."],
+["non-volatile","Read-oriented: changed only through controlled loads and corrections, not by everyday transactions."],
+["time-variant","Time is stored explicitly so data can be analysed by day, week, month, quarter or year."],
+["ETL","Extract → Transform (in a staging area) → Load into the warehouse."],
+["ELT","Extract → Load raw data first → Transform inside the analytical (cloud) platform."],
+["staging","Intermediate area where extracted data is cleaned and integrated before loading."],
+["metadata","Data about the data (definitions, structure, hierarchies)."],
+["business intelligence|BI","Applications and technologies to gather, provide access to and analyse business data so managers decide better."],
+["dashboard","One-screen display of key indicators, trends and comparisons for day-to-day management."],
+["operational system|operational systems","Systems that record and process transactions as they happen (POS, inventory, ledger) — OLTP."],
+["informational system|informational systems","Systems that support decision-making and analysis — OLAP."],
+["dimensional modelling","Organising warehouse data by subject, business dimensions and measures (facts)."],
+["dimension","A business perspective for analysis (time, branch, product) with hierarchy levels."],
+["fact table","Central star-schema table: foreign keys to dimensions plus numeric measures at a defined granularity."],
+["measure|measures","A numeric value to analyse (revenue, occupied rooms)."],
+["granularity|grain","The level of detail one fact row represents (e.g. one hotel branch, one room type, one month)."],
+["star schema","Central fact table linked by foreign keys (one-to-many) to surrounding dimension tables; the ROLAP structure."],
+["information package","Requirements table, one per subject: dimensions with their hierarchy levels plus the facts."],
+["data cube|hypercube","Conceptual multidimensional view: one axis per dimension, each cell a measure value. Not necessarily stored as a cube."],
+["roll-up|rolled up","Move up a dimension hierarchy to more summarised data (months → quarter)."],
+["drill-down","Move down a dimension hierarchy to more detail (quarter → months)."],
+["hierarchy","Ordered levels within a dimension (Year → Quarter → Month)."],
+["surrogate key|surrogate keys","System-generated key for a dimension row (via a sequence); lets the same business entity have several historical versions."],
+["business key","The identifier from the source system (e.g. Hotel_ID); stays the same across versions."],
+["ROLAP","Relational OLAP: dimensional view built on relational tables (star schema)."],
+["MOLAP","Multidimensional OLAP: data stored in specialised cube structures; very fast but needs precomputation."],
+["HOLAP","Hybrid OLAP: combines relational detail with cube summaries."],
+["DOLAP","Desktop OLAP: small cubes/data downloaded to the user's desktop."],
+["STARjoin","Join between the central fact table and several dimension tables."],
+["STARindex|STARindexes","Specialised indexes on fact/dimension tables; bitmap indexes are common for low-cardinality attributes."],
+["bitmap index|bitmap indexes","One bit-vector per distinct value marking matching rows; very fast filtering on low-cardinality columns."],
+["low-cardinality|low cardinality","Few distinct values (e.g. room type: Luxury, Budget)."],
+["materialised view|materialized view|materialised views","Precomputed, stored query result that speeds analytics but must be refreshed when data changes."],
+["slowly changing dimension|slowly changing dimensions|SCD","Strategy for dimension attributes that change over time: Type 1 overwrite, Type 2 new row, Type 3 extra column."],
+["Type 1","Slowly-changing dimension: overwrite the old value, so history is lost."],
+["Type 2","Slowly-changing dimension: add a new row (new surrogate key, effective dates) for each change; full history kept."],
+["Type 3","Slowly-changing dimension: add a column holding the previous value; only one previous value kept."],
+["MERGE","SQL statement: update the row if it matches, otherwise insert, in one statement; used to load dimensions."],
+["initial load","First population of the warehouse (everything is inserted)."],
+["incremental load|incremental loads","Later periodic loads that add new rows and update changed ones."],
+["CREATE DIMENSION","Oracle-specific statement that declares levels, hierarchies and attribute dependencies of a dimension table (metadata only)."],
+["GROUP BY CUBE|CUBE","Produces subtotals for all combinations of the listed grouping columns (2ⁿ groupings)."],
+["ROLLUP","Produces hierarchical subtotals from right to left plus a grand total."],
+["GROUPING SETS","Produces only the groupings you list explicitly; () is the grand total."],
+["windowing","Cumulative and moving aggregations (SUM, AVG, MIN, COUNT) over a range of rows using OVER (...)."],
+["moving average","Average over a sliding window of rows (e.g. the current and two preceding months)."],
+["DENSE_RANK","Ranking where ties share a rank and the next rank has no gap."],
+["RANK","Ranking where ties share a rank and the next rank skips numbers (gap)."],
+["N-tile|N-tiles|quartiles|deciles|percentiles","Ranking measures that split rows into equal-sized groups."],
+["percent rank","Relative rank of a row as a fraction of the rows."],
+["Power BI","Microsoft business-intelligence and dashboard tool."],
+["Tableau","Business-intelligence visualisation tool."],
+["Superset|Apache Superset","Open-source business-intelligence tool."],
+/* ---------- application-page extras ---------- */
+["OID|object identifier","Object identifier: unique, system-generated identity of an object, independent of its attribute values."],
+["encapsulation","Combining an object's data and the methods that operate on it into one unit."],
+["polymorphism","The same operation applied to different types of objects."],
+["impedance mismatch","Awkward fit between relational tables and the object model used by programs."],
+["semantic overloading","Relations cannot distinguish the different kinds of relationship they represent."],
+["JPA","Jakarta/Java Persistence API: standard for mapping Java objects to a database."],
+["JPQL","Java Persistence Query Language: SQL-like queries written against entities and attributes, not tables/columns."],
+["ObjectDB","Object database for Java, used through JPA."],
+["EntityManager","JPA object that represents a database connection and performs persist/find/remove/queries."],
+["POJO","Plain Old Java Object: an ordinary Java class (an entity is a POJO annotated with @Entity)."],
+["PL/pgSQL","PostgreSQL's procedural language: variables, IF, loops, RAISE EXCEPTION, used for functions and triggers."],
+["trigger function","Function (RETURNS TRIGGER) run automatically by a trigger; uses NEW and OLD rows."],
+["composite type","PostgreSQL user-defined type holding several named fields, like a record inside one column."],
+["XPath","Language for selecting nodes in an XML tree using location paths and predicates."],
+["XQuery","XML query language built on FLWOR expressions (for, let, where, order by, return)."],
+["FLWOR","XQuery expression: for, let, where, order by, return."],
+["XSD","XML Schema Definition: describes structure, element types and constraints of an XML document."],
+["namespace","Mechanism that prevents element-name clashes between different XML vocabularies."],
+["aggregation pipeline","MongoDB sequence of stages ($match, $group, $sort …) where each stage's output feeds the next."],
+["Cypher","Neo4j's declarative graph query language."],
+["property graph","Graph of nodes and typed, directed relationships, both able to hold key-value properties."],
+["CRISP-DM","Cross-Industry Standard Process for Data Mining: business understanding, data understanding, data preparation, modelling, evaluation, deployment."]
+];
+
+var SC={
+ "support":["^p3","^t6[3-7]$"],"confidence":["^p3","^t6[3-7]$"],
+ "classification":["^p3","^t6[3-7]$"],"clustering":["^p3","^t6[3-7]$"],"regression":["^p3","^t6[3-7]$"],"time series":["^p3","^t6[3-7]$"],
+ "dimension":["^p4","^t6(8|9|1[0-4])$"],"measure|measures":["^p4","^t6(8|9|1[0-4])$"],"hierarchy":["^p4","^t6(8|9|1[0-4])$"],
+ "metadata":["^p4","^t6(8|9|1[0-4])$"],"staging":["^p4","^t6(8|9|1[0-4])$"],
+ "batch processing|batch":["^p2","^t62$"],"streaming":["^p2","^t62$"],"stateful":["^p2","^t62$"],
+ "rolled back|rollback|roll back":["^p1","^(t22|t16|t61)$"],"commit":["^p1","^(t22|t16|t61)$"],"Atomicity|atomic":["^p1","^t61$"],
+ "partitioning|sharding":["^p1","^t61$"],"replication":["^p1","^t61$"],
+ "Volume":["^p2","^(t41|t62)$"],"Velocity":["^p2","^(t41|t62)$"],"Variety":["^p2","^(t41|t62)$"],"Veracity":["^p2","^(t41|t62)$"],
+ "Type 1":["^p4","^t613$"],"Type 2":["^p4","^t613$"],"Type 3":["^p4","^t613$"],
+ "MERGE":["^p4","^t6(9|11|12|13)$"]
+};
+var MAP={}, pats=[];
+G.forEach(function(e){
+  var sc=SC[e[0]];
+  e[0].split('|').forEach(function(t){
+    MAP[t.toLowerCase()]=[t,e[1],sc];
+    var v={}; v[t]=1;
+    if(t!==t.toUpperCase()){ v[t.toLowerCase()]=1; v[t.charAt(0).toUpperCase()+t.slice(1)]=1; }
+    Object.keys(v).forEach(function(x){pats.push(x);});
+  });
+});
+pats=pats.filter(function(x,i){return pats.indexOf(x)===i;});
+pats.sort(function(a,b){return b.length-a.length;});
+function esc(x){return x.replace(/[.*+?^${}()|[\]\\\/]/g,'\\$&');}
+var RX=new RegExp('(?<![\\w\\-\\/])('+pats.map(esc).join('|')+')(?:s|es)?(?![\\w\\-\\/])','g');
+
+function lookup(m){
+  var k=m.toLowerCase();
+  if(MAP[k])return MAP[k];
+  if(MAP[k.replace(/es$/,'')])return MAP[k.replace(/es$/,'')];
+  if(MAP[k.replace(/s$/,'')])return MAP[k.replace(/s$/,'')];
+  return null;
+}
+var SKIP={PRE:1,CODE:1,SUMMARY:1,A:1,BUTTON:1,SCRIPT:1,STYLE:1,TH:1,TEXTAREA:1,INPUT:1,NAV:1};
+function skip(n){
+  for(var p=n.parentElement;p;p=p.parentElement){
+    if(SKIP[p.tagName])return true;
+    if(p.classList&&(p.classList.contains('kw')||p.classList.contains('tag')||p.classList.contains('term')||p.classList.contains('lbl')||p.classList.contains('num')||p.classList.contains('ttl')||p.classList.contains('bar')||p.classList.contains('ctl')))return true;
+  }
+  return false;
+}
+function inScope(tn,rx){
+  for(var p=tn.parentElement;p;p=p.parentElement){ if(p.tagName==='DETAILS'&&p.id&&rx.test(p.id))return true; }
+  return false;
+}
+function run(){
+  var root=document.querySelector('main'); if(!root)return;
+  var used={}, nodes=[];
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);
+  while(w.nextNode()){ if(w.currentNode.nodeValue.trim().length>2)nodes.push(w.currentNode); }
+  var scopeId=0, scopeMap=new Map(); var isApp=!!document.querySelector('details.topic');
+  nodes.forEach(function(tn){
+    if(skip(tn))return;
+    var text=tn.nodeValue; RX.lastIndex=0;
+    var m, last=0, frag=null;
+    var sc=tn.parentElement.closest('details.sec,details.topic,details.part')||root;
+    if(!scopeMap.has(sc))scopeMap.set(sc,++scopeId);
+    var sid=scopeMap.get(sc);
+    while((m=RX.exec(text))){
+      var info=lookup(m[0]); if(!info)continue;
+      if(info[2]&&!inScope(tn,new RegExp(info[2][isApp?1:0])))continue;
+      var key=sid+'|'+info[0].toLowerCase();
+      if(used[key])continue;
+      used[key]=1;
+      if(!frag)frag=document.createDocumentFragment();
+      if(m.index>last)frag.appendChild(document.createTextNode(text.slice(last,m.index)));
+      var sp=document.createElement('span');
+      sp.className='term'; sp.tabIndex=0; sp.textContent=m[0];
+      sp.setAttribute('data-t',info[0]); sp.setAttribute('data-d',info[1]);
+      frag.appendChild(sp); last=m.index+m[0].length;
+    }
+    if(frag){
+      if(last<text.length)frag.appendChild(document.createTextNode(text.slice(last)));
+      tn.parentNode.replaceChild(frag,tn);
+    }
+  });
+}
+try{run();}catch(e){console&&console.error&&console.error(e);}
+
+var tip=document.createElement('div'); tip.id='tip'; document.body.appendChild(tip);
+var cur=null, pinned=false;
+function showAt(t,d,r){
+  tip.innerHTML='<b></b><span></span>';
+  tip.firstChild.textContent=t; tip.lastChild.textContent=d;
+  tip.style.display='block';
+  var tw=tip.offsetWidth, th=tip.offsetHeight;
+  var x=Math.max(8,Math.min(r.left,window.innerWidth-tw-8));
+  var y=r.bottom+8; if(y+th>window.innerHeight-8)y=Math.max(8,r.top-th-8);
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function show(el){ cur=el; pinned=false; showAt(el.getAttribute('data-t'),el.getAttribute('data-d'),el.getBoundingClientRect()); }
+function hide(){cur=null;pinned=false;tip.style.display='none';}
+document.addEventListener('mouseover',function(e){var t=e.target.closest&&e.target.closest('.term'); if(t)show(t); else if(cur&&!pinned&&!(e.target.closest&&e.target.closest('#tip')))hide();});
+document.addEventListener('focusin',function(e){var t=e.target.closest&&e.target.closest('.term'); if(t)show(t);});
+document.addEventListener('focusout',hide);
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.term'); if(t)show(t); else hide();});
+document.addEventListener('scroll',hide,true);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')hide();});
+
+var toast=document.createElement('div'); toast.id='toast'; document.body.appendChild(toast);
+var toastT=null;
+function showToast(msg){
+  toast.textContent=msg; toast.classList.add('on');
+  clearTimeout(toastT); toastT=setTimeout(function(){toast.classList.remove('on');},2400);
+}
+function findDef(sel){
+  var k=sel.toLowerCase().replace(/\s+/g,' ').trim().replace(/^[^\w]+|[^\w)]+$/g,'');
+  if(!k)return null;
+  var cands=[k,k.replace(/es$/,''),k.replace(/s$/,'')];
+  for(var i=0;i<cands.length;i++){ if(MAP[cands[i]])return MAP[cands[i]]; }
+  var best=null;                      // a longer selection that contains a defined term
+  Object.keys(MAP).forEach(function(t){
+    if(t.length<3)return;
+    var re=new RegExp('(^|[^\w])'+esc(t)+'(s|es)?($|[^\w])');
+    if(re.test(k)&&(!best||t.length>best[0].length))best=MAP[t];
+  });
+  if(best)return best;
+  if(k.length>=4){                    // a single word that is part of a longer defined term (e.g. "horizontal")
+    var part=[], seen={};
+    Object.keys(MAP).forEach(function(t){
+      if(t.indexOf(' ')<0&&t.indexOf('-')<0)return;
+      var re=new RegExp('(^|[^\w])'+esc(k)+'(s|es)?($|[^\w])');
+      if(re.test(t)&&!seen[MAP[t][1]]){seen[MAP[t][1]]=1;part.push(MAP[t]);}
+    });
+    if(part.length===1)return part[0];
+    if(part.length>1)return [txtTitle(k),part.slice(0,3).map(function(x){return x[0]+' — '+x[1];}).join('  •  ')];
+  }
+  return null;
+}
+function txtTitle(k){return k.charAt(0).toUpperCase()+k.slice(1);}
+document.addEventListener('contextmenu',function(e){
+  var sel=window.getSelection&&window.getSelection(); var txt=sel?sel.toString().trim():'';
+  if(!txt||txt.length>80||e.target.closest('input,textarea'))return;   // nothing selected: normal menu
+  e.preventDefault();
+  var info=findDef(txt);
+  if(!info){ hide(); showToast('“'+(txt.length>40?txt.slice(0,40)+'…':txt)+'” is not a defined word'); return; }
+  var r=sel.getRangeAt(0).getBoundingClientRect();
+  cur=tip; pinned=true; showAt(info[0],info[1],r);
+});
+})();
+</script>
+</body>
+</html>
