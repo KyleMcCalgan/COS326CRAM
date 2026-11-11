@@ -1453,7 +1453,7 @@ Check against the data: medians Maths <b>82.5</b> (81 and 84), English <b>86</b>
     var n=el; while(n){ if(n.tagName==='DETAILS')n.open=true; n=n.parentElement; }
     setTimeout(function(){el.scrollIntoView({block:'start'});},30);
   }
-  document.querySelectorAll('nav a').forEach(function(a){
+  document.querySelectorAll('nav a[href^="#"]').forEach(function(a){
     a.addEventListener('click',function(e){ var id=a.getAttribute('href').slice(1); e.preventDefault(); history.replaceState(null,'','#'+id); openFor(id); });
   });
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
