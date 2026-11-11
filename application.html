@@ -106,7 +106,6 @@ body.nav-off nav{display:none}
 #toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(10px);opacity:0;pointer-events:none;background:var(--tipbg);color:var(--ink);padding:9px 18px;border-radius:20px;box-shadow:0 6px 24px rgba(0,0,0,.22);font-size:14px;transition:opacity .2s,transform .2s;z-index:101}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 /*ENDGLOSS*/
-
 .mins{float:right;color:var(--muted);font-size:11.5px;margin-left:8px;opacity:.9;font-weight:400}
 .legend{font-size:11.5px;color:var(--muted);margin:-4px 0 8px 8px}
 .total{display:inline-block;background:var(--soft);border-radius:20px;padding:4px 14px;margin:0 0 16px;font-size:14px;color:var(--ink)}
@@ -127,7 +126,7 @@ body.nav-off nav{display:none}
 <div class="layout">
 <nav>
 <a class="back" href="index.html">&larr; COS326 CRAM</a>
-  <div class="legend"><b>Total: about 6 h 08 min to practise everything &middot; about 1 h 14 min just to read</b><br>Practise time per card (read + write both examples)</div>
+  <div class="legend"><b>Total: about 6 h 19 min to practise everything &middot; about 1 h 17 min just to read</b><br>Practise time per card (read + write both examples)</div>
 <a class="np" href="#intro"><span class="mins">8 min</span>How to use this & the exam map</a>
 <a class="np" href="#p1"><span class="mins">1 h 01 min</span>Part 1 — PostgreSQL / ORDBMS (psql)</a>
 <a class="nt" href="#t11"><span class="mins">8 min</span>1.1 Composite &amp; enum types — create, insert, query</a>
@@ -172,7 +171,7 @@ body.nav-off nav{display:none}
 <a class="nt" href="#t65"><span class="mins">10 min</span>6.5 Apriori trace ("show all your working")</a>
 <a class="nt" href="#t66"><span class="mins">7 min</span>6.6 Other frequent-itemset algorithms &amp; FP-tree</a>
 <a class="nt" href="#t67"><span class="mins">7 min</span>6.7 Classification (decision tree), clustering (k-means), choosing a technique</a>
-<a class="np" href="#p6b"><span class="mins">57 min</span>Part 6 (cont.) — Data Warehousing &amp; OLAP</a>
+<a class="np" href="#p6b"><span class="mins">1 h 08 min</span>Part 6 (cont.) — Data Warehousing &amp; OLAP, then PySpark</a>
 <a class="nt" href="#t68"><span class="mins">8 min</span>6.8 Warehouse theory: OLTP vs OLAP, 4 properties, ETL/ELT, fact table, data mart, BI</a>
 <a class="nt" href="#t69"><span class="mins">9 min</span>6.9 Dimensional design: information package → star schema → star-join SQL</a>
 <a class="nt" href="#t610"><span class="mins">7 min</span>6.10 Roll-up &amp; drill-down calculations</a>
@@ -180,12 +179,13 @@ body.nav-off nav{display:none}
 <a class="nt" href="#t612"><span class="mins">9 min</span>6.12 GROUP BY CUBE / ROLLUP / GROUPING SETS — write &amp; predict</a>
 <a class="nt" href="#t613"><span class="mins">8 min</span>6.13 Slowly changing dimensions &amp; MERGE loading</a>
 <a class="nt" href="#t614"><span class="mins">8 min</span>6.14 Window functions &amp; ranking (moving averages, RANK vs DENSE_RANK)</a>
+<a class="nt" href="#t615"><span class="mins">11 min</span>6.15 PySpark DataFrames — load, group, join, export</a>
 <a class="np" href="#p7"><span class="mins">8 min</span>Part 7 — Keyword bank, checklists &amp; coverage</a>
 </nav>
 <main>
 <h1>COS 326 &mdash; Application Question Templates</h1>
 <p class="sub">Every kind of application question the papers ask: the wording to recognise, the template (shape) to write, the keywords that earn marks, two worked examples (tap a card to open it; answers stay hidden until you click), and the traps. Built from the 2020&ndash;2024 exams, the 2024/2025 semester tests and the marked 2026 tests, covering Lectures 1&ndash;24.</p>
-<div class="total">&#9201; Total: about 6 h 08 min to practise everything &middot; about 1 h 14 min just to read</div>
+<div class="total">&#9201; Total: about 6 h 19 min to practise everything &middot; about 1 h 17 min just to read</div>
 <section class="part" id="intro"><details class="partd" open><summary class="part-h">How to use this & the exam map</summary><div class="partbody">
 <div class="card">
 <h3>The 4-step routine for ANY application question</h3>
@@ -227,6 +227,7 @@ body.nav-off nav{display:none}
 <tr><td>NewSQL / Big Data / MapReduce</td><td>E24 Q8, Q9, Q26a; E20 Q37 (+ T/F on NewSQL, MapReduce)</td><td>6.1–6.2</td></tr>
 <tr><td>Data mining</td><td>E24 Q26b, Q33 (Apriori); E20 Q38 (CRISP-DM)</td><td>6.3–6.7</td></tr>
 <tr><td>Data warehousing / OLAP</td><td>E24 Q10, Q19, Q20, Q27, Q34; E20 Q35</td><td>6.8–6.14</td></tr>
+<tr><td>PySpark (practical)</td><td>PySpark practical exercise (student scores) — no past-paper question seen</td><td>6.15</td></tr>
 </table></div>
 
 <h3>Quick finder — if the question says…</h3>
@@ -262,6 +263,7 @@ body.nav-off nav{display:none}
 <tr><td>GROUP BY CUBE / ROLLUP / GROUPING SETS</td><td><a href="#t612">6.12</a></td></tr>
 <tr><td>Type 1/2/3 change, MERGE</td><td><a href="#t613">6.13</a></td></tr>
 <tr><td>moving average, RANK, DENSE_RANK, OVER</td><td><a href="#t614">6.14</a></td></tr>
+<tr><td>PySpark / DataFrame / <code>spark.read.csv</code> / <code>groupBy().agg()</code></td><td><a href="#t615">6.15</a></td></tr>
 <tr><td>a one-word blank</td><td><a href="#p7">Part 7 keyword bank</a></td></tr>
 </table></div>
 </div></details></section>
@@ -1128,7 +1130,7 @@ TECHNIQUE: name it → justify against the data and goal → state a limitation<
 (b) <b>Clustering</b> · <b>Classification</b> (decision tree) · <b>Association rules</b> (Apriori/FP-growth) · <b>Genetic algorithm</b> (optimisation) · <b>Time-series</b> (or regression / neural network).</div></details></div>
 </div></details>
 </div></details></section>
-<section class="part" id="p6b"><details class="partd" open><summary class="part-h">Part 6 (cont.) — Data Warehousing &amp; OLAP</summary><div class="partbody">
+<section class="part" id="p6b"><details class="partd" open><summary class="part-h">Part 6 (cont.) — Data Warehousing &amp; OLAP, then PySpark</summary><div class="partbody">
 <details class="topic" id="t68"><summary><span class="num">6.8</span><span class="ttl">Warehouse theory: OLTP vs OLAP, 4 properties, ETL/ELT, fact table, data mart, BI</span><span class="tags"><span class="tag">L23</span></span></summary><div class="tbody">
 <div class="seen"><b>Seen in:</b> E24 Q19, Q27(a) · E20 Q35 · lecture</div>
 <div class="row"><div class="lbl">Looks like</div><div class="body">"What is a fact table? Describe its role in OLAP", "distinguish operational from informational systems", "define a data warehouse", "ETL vs ELT", "why implement a data mart?", "_____ refers to a class of applications and technologies used to gather, provide access to, and analyse data about business operations"</div></div>
@@ -1293,6 +1295,65 @@ FROM Branch JOIN PropertySale ON Branch.branchNo = PropertySale.branchNo
 WHERE Branch.city = 'Pretoria' GROUP BY Branch.branchNo;</code></pre>
 Combine with ROLLUP when asked for "per province and quarter, subtotals and a grand total, plus a ranking": ROLLUP for the totals, RANK() OVER for the ordering (on province-level totals).</div></details></div>
 <div class="trap"><b>Traps &amp; mark-losers:</b> Qualify <code>Branch.branchNo</code> (ambiguous otherwise). RANK skips numbers after ties; DENSE_RANK doesn't.</div>
+</div></details>
+<details class="topic" id="t615"><summary><span class="num">6.15</span><span class="ttl">PySpark DataFrames — load, group, join, export</span><span class="tags"><span class="tag">L21</span></span></summary><div class="tbody">
+<div class="seen"><b>Seen in:</b> COS326 PySpark practical (Colab, student scores) · L21 Spark class activity · no past-paper question seen yet</div>
+<div class="row"><div class="lbl">Looks like</div><div class="body">"Write PySpark code to compute the average / maximum score per subject", "identify the top scorer for each subject (join)", "load the CSV into a DataFrame", "compute the median", "export the results to CSV", "plot the averages"</div></div>
+<div class="row"><div class="lbl">Template &mdash; the shape</div><div class="body"><pre class="tplpre"><code>from pyspark.sql import SparkSession
+from pyspark.sql.functions import avg, max, min, count, col, lit, rand      # max here shadows Python's max()
+
+spark = SparkSession.builder.appName("name").getOrCreate()                  # entry point (once)
+df = spark.read.csv("file.csv", header=True, inferSchema=True)              # header row + guess column types
+df.show(10);  df.printSchema()
+
+df.filter(col("Score") &gt; 80).select("Name", "Score").orderBy(col("Score").desc())     # WHERE / SELECT / ORDER BY
+df.groupBy("Subject").agg(avg("Score").alias("AverageScore"),                          # GROUP BY + aggregates
+                          max("Score").alias("MaxScore"), count("*").alias("n"))
+
+a = df.alias("d");  m = max_scores.alias("m")                               # alias BOTH sides before a self-style join
+a.join(m, (col("d.Subject") == col("m.Subject")) &amp; (col("d.Score") == col("m.MaxScore"))) \
+ .select(col("d.Name").alias("Name"), col("d.Subject").alias("Subject"), col("d.Score").alias("Score"))
+
+df.createOrReplaceTempView("students")                                      # SQL alternative
+spark.sql("SELECT Subject, AVG(Score) AS AverageScore FROM students GROUP BY Subject")
+
+result.write.csv("out_folder", header=True, mode="overwrite")               # export (writes a folder of part files)</code></pre></div></div>
+<div class="row"><div class="lbl">Keywords to write</div><div class="body kw"><span>SparkSession.builder.appName().getOrCreate()</span><span>spark.read.csv(header=True, inferSchema=True)</span><span>.show()</span><span>groupBy().agg()</span><span>avg / max / count</span><span>.alias()</span><span>col("d.Subject")</span><span>.join(cond)</span><span>.select()</span><span>.filter() / where</span><span>orderBy</span><span>createOrReplaceTempView</span><span>spark.sql</span><span>.write.csv</span><span>.toPandas()</span></div></div>
+<div class="ex"><div class="exh">Example 1 — the practical: average, maximum and top scorer per subject</div><div class="q">The CSV has 30 rows (Name, Subject, Score) for 10 students in Maths, English and Science. (a) average score per subject, (b) maximum per subject, (c) join to find each subject's top scorer. What do the three <code>show()</code> calls print?</div><details class="ans"><summary>Show answer &amp; working</summary><div class="a"><pre><code>avg_scores = df.groupBy("Subject").agg(avg("Score").alias("AverageScore"))
+max_scores = df.groupBy("Subject").agg(max("Score").alias("MaxScore"))
+
+df_alias  = df.alias("d")
+max_alias = max_scores.alias("m")
+top_scorers = (df_alias.join(max_alias,
+                    (col("d.Subject") == col("m.Subject")) &amp; (col("d.Score") == col("m.MaxScore")))
+               .select(col("d.Name").alias("Name"), col("d.Subject").alias("Subject"), col("d.Score").alias("Score")))
+
+avg_scores.show();  max_scores.show();  top_scorers.show()</code></pre>
+Output (row order is not guaranteed): <b>averages</b> Maths 82.3 · English 85.5 · Science 89.5 (sums 823 / 855 / 895 over 10 students). <b>maxima</b> Maths 94 · English 95 · Science 97. <b>top scorers</b> Sipho / Maths / 94 · Ayanda / English / 95 · Siyanda / Science / 97. Steps to name in an explanation: aggregate per group → alias both DataFrames so <code>Subject</code> isn't ambiguous → join on subject <b>and</b> score = max → select/rename columns. If two students tied on the maximum, both would appear.</div></details></div>
+<div class="ex"><div class="exh">Example 2 — the homework: Physics, median, chart, export</div><div class="q">(1) add a Physics subject with random scores for each student; (2) median per subject; (3) bar chart of average scores; (4) export averages and top scorers to CSV.</div><details class="ans"><summary>Show answer &amp; working</summary><div class="a"><pre><code>from pyspark.sql.functions import lit, rand, expr
+
+# 1. new subject: one row per student with a random score 60-99
+physics = (df.select("Name").distinct()
+             .withColumn("Subject", lit("Physics"))
+             .withColumn("Score", (rand() * 40 + 60).cast("int")))
+df2 = df.unionByName(physics)
+
+# 2. median per subject (exact)
+medians = df2.groupBy("Subject").agg(expr("percentile(Score, 0.5)").alias("MedianScore"))
+#    Spark 3.4+: from pyspark.sql.functions import median -&gt;  agg(median("Score"))
+#    percentile_approx(...) is approximate and returns an actual data value
+
+# 3. bar chart (bring the small result to pandas)
+import matplotlib.pyplot as plt
+pdf = avg_scores.toPandas()
+pdf.plot(kind="bar", x="Subject", y="AverageScore", legend=False)
+plt.ylabel("Average score"); plt.show()
+
+# 4. export
+avg_scores.coalesce(1).write.csv("avg_scores", header=True, mode="overwrite")
+top_scorers.coalesce(1).write.csv("top_scorers", header=True, mode="overwrite")</code></pre>
+Check against the data: medians Maths <b>82.5</b> (81 and 84), English <b>86</b> (85 and 87), Science <b>89.5</b> (89 and 90). <code>write.csv</code> creates a <b>folder</b> containing <code>part-…csv</code>; <code>coalesce(1)</code> gives a single part file (or use <code>toPandas().to_csv("file.csv", index=False)</code> for one named file).</div></details></div>
+<div class="trap"><b>Traps &amp; mark-losers:</b> <code>max</code>/<code>min</code>/<code>round</code> imported from <code>pyspark.sql.functions</code> shadow Python's built-ins — import the module as <code>F</code> if you also use them normally. Transformations (<code>filter</code>, <code>groupBy</code>, <code>join</code>) are <b>lazy</b>; only actions (<code>show</code>, <code>count</code>, <code>collect</code>, <code>write</code>) run the DAG. Without <code>inferSchema=True</code> every column is a string (so <code>avg</code> on Score would misbehave); without <code>header=True</code> the header row becomes data. After a join on same-named columns, qualify with <code>col("d.Subject")</code>.</div>
 </div></details>
 </div></details></section>
 <section class="part" id="p7"><details class="partd" open><summary class="part-h">Part 7 — Keyword bank, checklists &amp; coverage</summary><div class="partbody">
